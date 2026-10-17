@@ -1,0 +1,2627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LHO Interaktif – Jelajah Dunia Observasi</title>
+<meta name="description" content="Media pembelajaran digital Bahasa Indonesia kelas X SMK/Fase E: Teks Laporan Hasil Observasi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIABEL & DASAR
+============================================================ */
+:root{
+  --biru-900:#062b4a;
+  --biru-700:#0b5ea8;
+  --biru-500:#1683d8;
+  --toska:#0fb9b1;
+  --toska-600:#0a9a94;
+  --oranye:#ff8c1a;
+  --oranye-600:#e06f00;
+  --bg:#eef6fb;
+  --card:#ffffff;
+  --teks:#0f2436;
+  --teks-soft:#5a7184;
+  --line:#dbe9f3;
+  --ok:#0f9d58;
+  --err:#d93025;
+  --warn:#f29900;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(6,43,74,.10);
+  --shadow-lg:0 24px 60px rgba(6,43,74,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;padding:0;
+  font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(900px 500px at 10% -10%, #d8f2ff 0%, transparent 60%),
+    radial-gradient(800px 500px at 95% 0%, #d5f8f4 0%, transparent 55%),
+    var(--bg);
+  color:var(--teks);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+h1,h2,h3,h4{margin:0 0 .5rem;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800}
+h2{font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:800}
+h3{font-size:1.1rem;font-weight:800}
+h4{font-size:.98rem;font-weight:800;margin-bottom:.4rem}
+p{margin:.4rem 0}
+ul{margin:.4rem 0 .4rem 1.1rem;padding:0}
+li{margin:.22rem 0}
+a{color:var(--biru-700)}
+button{font-family:inherit}
+.hidden{display:none !important}
+.muted{color:var(--teks-soft);font-size:.9rem}
+.lead{font-size:1.02rem;background:#f2fbff;border-left:5px solid var(--toska);padding:12px 16px;border-radius:12px;margin:.6rem 0 1rem}
+.center{text-align:center}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row-between{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:14px}
+
+/* ============================================================
+   TOMBOL
+============================================================ */
+.btn{
+  border:0;border-radius:14px;padding:12px 20px;font-weight:800;font-size:.94rem;
+  cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  display:inline-flex;align-items:center;gap:8px;justify-content:center;
+}
+.btn:focus-visible{outline:3px solid #ffb457;outline-offset:2px}
+.btn-primary{background:linear-gradient(135deg,var(--biru-500),var(--toska));color:#fff;box-shadow:0 10px 24px rgba(11,94,168,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(11,94,168,.34)}
+.btn-orange{background:linear-gradient(135deg,#ffb457,var(--oranye-600));color:#fff;box-shadow:0 10px 24px rgba(224,111,0,.28)}
+.btn-orange:hover{transform:translateY(-2px)}
+.btn-ghost{background:#e9f4fc;color:var(--biru-700)}
+.btn-ghost:hover{background:#dcecf9}
+.btn-soft{background:#f1f5f9;color:var(--teks-soft)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none !important;box-shadow:none}
+.btn-sm{padding:8px 14px;font-size:.85rem;border-radius:11px}
+
+/* ============================================================
+   HALAMAN PEMBUKA
+============================================================ */
+.welcome{
+  min-height:100vh;display:grid;place-items:center;padding:26px 18px;
+  background:
+    radial-gradient(1000px 600px at 15% 0%, #d6f3ff 0%, transparent 60%),
+    radial-gradient(900px 600px at 90% 15%, #d3faf5 0%, transparent 55%),
+    linear-gradient(160deg,#f4fbff 0%, #eaf6fd 100%);
+}
+.welcome-card{
+  width:100%;max-width:600px;background:#fff;border-radius:28px;
+  padding:32px 28px 30px;box-shadow:var(--shadow-lg);text-align:center;
+  border:1px solid #eaf4fb;
+  animation: pop .5s cubic-bezier(.2,.9,.3,1.2) both;
+}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+.illus{
+  font-size:clamp(2.6rem,9vw,3.6rem);letter-spacing:.1em;margin-bottom:6px;
+  animation: floaty 3.4s ease-in-out infinite;
+}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.welcome-card h1{
+  background:linear-gradient(120deg,var(--biru-700),var(--toska));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:6px;
+}
+.welcome-card .sub{color:var(--teks-soft);font-size:.98rem;margin-bottom:22px}
+.field{text-align:left;margin-bottom:14px}
+.field label{display:block;font-weight:800;font-size:.85rem;margin-bottom:6px;color:var(--biru-900)}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 14px;border-radius:13px;border:2px solid var(--line);
+  font-size:.95rem;font-family:inherit;background:#fbfdff;color:var(--teks);
+  transition:border-color .15s, box-shadow .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--toska);box-shadow:0 0 0 4px rgba(15,185,177,.15);background:#fff;
+}
+.welcome-actions{display:grid;gap:10px;margin-top:8px}
+.note{font-size:.78rem;color:var(--teks-soft);margin-top:16px;line-height:1.5}
+
+/* ============================================================
+   SHELL APLIKASI
+============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 18px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.brand{font-weight:800;font-size:1rem;color:var(--biru-900);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.brand small{font-weight:600;color:var(--teks-soft);font-size:.72rem;display:block;line-height:1}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.prog-mini{width:110px;height:9px;border-radius:99px;background:#e2eef7;overflow:hidden}
+.prog-mini i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--biru-500),var(--toska));transition:width .4s}
+.prog-mini-text{font-size:.8rem;font-weight:800;color:var(--biru-700);min-width:36px}
+.avatar{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--oranye),#ffb457);color:#fff;font-weight:800;font-size:.95rem;
+  box-shadow:0 6px 16px rgba(224,111,0,.3);cursor:pointer;
+}
+.btn-icon{
+  border:0;background:#eaf4fb;color:var(--biru-700);width:42px;height:42px;border-radius:12px;
+  font-size:1.15rem;cursor:pointer;display:none;
+}
+.layout{display:flex;gap:20px;max-width:1400px;margin:0 auto;padding:20px;align-items:flex-start}
+.sidebar{
+  flex:0 0 248px;width:248px;position:sticky;top:82px;
+  background:#fff;border-radius:var(--radius);padding:12px;
+  box-shadow:var(--shadow);max-height:calc(100vh - 104px);overflow-y:auto;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  border:0;background:transparent;color:var(--teks-soft);
+  padding:11px 13px;border-radius:12px;font-size:.9rem;font-weight:700;
+  cursor:pointer;transition:.15s;margin-bottom:2px;
+}
+.nav-item:hover{background:#f2f9fe;color:var(--biru-700)}
+.nav-item.active{background:linear-gradient(120deg,var(--biru-500),var(--toska));color:#fff;box-shadow:0 8px 18px rgba(11,94,168,.24)}
+.nav-sep{height:1px;background:var(--line);margin:8px 6px}
+.main{flex:1;min-width:0;padding-bottom:30px}
+.view{display:none;animation:fade .3s ease both}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   KARTU & KOMPONEN
+============================================================ */
+.card{
+  background:var(--card);border-radius:var(--radius);padding:20px 22px;
+  box-shadow:var(--shadow);margin-bottom:18px;border:1px solid #eef6fb;
+}
+.hero-card{
+  background:linear-gradient(120deg,#0b5ea8 0%, #1683d8 45%, #0fb9b1 100%);
+  color:#fff;border-radius:22px;padding:26px;display:flex;gap:18px;
+  align-items:center;justify-content:space-between;box-shadow:0 18px 40px rgba(11,94,168,.28);
+  margin-bottom:18px;overflow:hidden;position:relative;
+}
+.hero-card h2{color:#fff}
+.hero-card .eyebrow{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0}
+.hero-card p{color:rgba(255,255,255,.92)}
+.hero-emoji{font-size:clamp(2.6rem,7vw,4rem);filter:drop-shadow(0 8px 16px rgba(0,0,0,.18))}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px}
+.stat{
+  background:#fff;border-radius:16px;padding:16px;box-shadow:var(--shadow);
+  border:1px solid #eef6fb;text-align:center;
+}
+.stat .num{font-size:1.5rem;font-weight:800;color:var(--biru-700);line-height:1.1}
+.stat .lbl{font-size:.78rem;color:var(--teks-soft);font-weight:700;margin-top:4px}
+.ring-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ring{
+  --p:0;
+  width:96px;height:96px;border-radius:50%;flex:0 0 96px;
+  background:conic-gradient(var(--toska) calc(var(--p)*1%), #e2eef7 0);
+  display:grid;place-items:center;position:relative;
+}
+.ring::after{
+  content:'';position:absolute;inset:9px;border-radius:50%;background:#fff;
+}
+.ring span{position:relative;z-index:1;font-weight:800;font-size:1.15rem;color:var(--biru-700)}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;background:#e9f6ff;color:var(--biru-700);
+  padding:5px 12px;border-radius:99px;font-size:.78rem;font-weight:800;
+}
+.chip.orange{background:#fff1e0;color:var(--oranye-600)}
+.chip.green{background:#e2f8f1;color:#0a8a5f}
+.chip.gray{background:#eef2f6;color:var(--teks-soft)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:12px 0}
+.mini{background:#f7fbff;border:1px solid #e6f2fa;border-radius:14px;padding:14px 16px}
+.mini h4{color:var(--biru-700)}
+.contoh{background:#fffaf2;border:1px dashed #ffcf94;border-radius:14px;padding:14px 16px;margin-top:12px}
+.contoh h4{color:var(--oranye-600)}
+
+/* ============================================================
+   MODUL MATERI
+============================================================ */
+.modul-card{
+  display:flex;gap:16px;align-items:flex-start;background:#fff;border-radius:16px;padding:16px 18px;
+  box-shadow:var(--shadow);margin-bottom:12px;border:1px solid #eef6fb;transition:.18s;
+}
+.modul-card:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(6,43,74,.13)}
+.modul-ikon{
+  flex:0 0 52px;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+  font-size:1.5rem;background:linear-gradient(135deg,#e3f4ff,#d5f8f3);
+}
+.modul-body{flex:1;min-width:0}
+.modul-body h4{margin:0 0 2px}
+.struktur-umum{background:#e6f3ff;border-left:5px solid var(--biru-500);padding:10px 14px;border-radius:10px;margin:8px 0}
+.struktur-bagian{background:#e2f8f1;border-left:5px solid var(--toska);padding:10px 14px;border-radius:10px;margin:8px 0}
+.struktur-manfaat{background:#fff1e0;border-left:5px solid var(--oranye);padding:10px 14px;border-radius:10px;margin:8px 0}
+
+/* ============================================================
+   LATIHAN / AKTIVITAS
+============================================================ */
+.lat-item{
+  background:#f9fcff;border:1px solid #e6f2fa;border-radius:14px;
+  padding:14px 16px;margin-bottom:12px;
+}
+.lat-item p{margin:0 0 10px;font-weight:600}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap}
+.pill{
+  border:2px solid var(--line);background:#fff;color:var(--teks-soft);
+  padding:7px 16px;border-radius:99px;font-weight:800;font-size:.84rem;cursor:pointer;transition:.15s;
+}
+.pill:hover{border-color:var(--toska);color:var(--biru-700)}
+.pill.sel{background:linear-gradient(135deg,var(--biru-500),var(--toska));border-color:transparent;color:#fff}
+.fb{margin-top:9px;font-size:.86rem;font-weight:700;min-height:1px}
+.fb.ok{color:var(--ok)}
+.fb.err{color:var(--err)}
+.fb.warn{color:var(--warn)}
+.opsi-list{display:grid;gap:9px;margin-top:12px}
+.opsi{
+  text-align:left;border:2px solid var(--line);background:#fff;border-radius:13px;
+  padding:12px 16px;font-size:.93rem;font-weight:600;cursor:pointer;transition:.15s;color:var(--teks);
+}
+.opsi:hover:not(:disabled){border-color:var(--toska);background:#f4fdff}
+.opsi.correct{border-color:var(--ok);background:#e9f8ef;color:#0a6b3d}
+.opsi.wrong{border-color:var(--err);background:#fdecea;color:#a3241c}
+.opsi:disabled{cursor:default}
+.urut-sumber{display:grid;gap:10px;margin:12px 0}
+.urut-card{
+  text-align:left;border:2px dashed #cfe4f2;background:#fbfdff;border-radius:13px;
+  padding:12px 16px;font-size:.9rem;cursor:pointer;transition:.15s;color:var(--teks);
+}
+.urut-card:hover:not(:disabled){border-color:var(--toska);background:#f2fdff}
+.urut-card:disabled{opacity:.35;cursor:not-allowed}
+.urut-target{display:grid;gap:8px;margin:12px 0;min-height:52px;background:#f4fbff;border-radius:13px;padding:12px;border:1px solid #e2f0fa}
+.urut-chip{
+  display:flex;gap:8px;align-items:flex-start;background:#fff;border-radius:10px;padding:9px 12px;
+  font-size:.86rem;border:1px solid var(--line);cursor:pointer;
+}
+.urut-chip b{color:var(--biru-700)}
+.urut-chip span{margin-left:auto;color:var(--err);font-weight:800}
+.check-list{display:grid;gap:9px}
+.check-item{
+  display:flex;gap:11px;align-items:flex-start;background:#f9fcff;border:2px solid var(--line);
+  border-radius:13px;padding:12px 14px;cursor:pointer;transition:.15s;font-size:.92rem;
+}
+.check-item:hover{border-color:var(--toska)}
+.check-item.on{border-color:var(--toska);background:#effdff}
+.check-item input{margin-top:4px;width:18px;height:18px;accent-color:var(--toska);flex:0 0 auto}
+
+/* ============================================================
+   GALERI
+============================================================ */
+.galeri-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.objek-card{
+  background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+  border:1px solid #eef6fb;display:flex;flex-direction:column;transition:.18s;
+}
+.objek-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(6,43,74,.14)}
+.objek-visual{
+  height:110px;display:grid;place-items:center;font-size:3rem;
+  background:linear-gradient(135deg,#d9f2ff,#d3f8f2);
+}
+.objek-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.objek-body h4{margin:0}
+.objek-body .fakta{font-size:.83rem;color:var(--teks-soft);margin:0;padding-left:16px}
+.objek-body .fakta li{margin:.15rem 0}
+.objek-body .btn{margin-top:auto}
+
+/* ============================================================
+   MISI
+============================================================ */
+.misi-card{
+  background:#fff;border-radius:18px;box-shadow:var(--shadow);border:1px solid #eef6fb;
+  margin-bottom:16px;overflow:hidden;
+}
+.misi-head{
+  display:flex;gap:14px;align-items:center;padding:16px 18px;cursor:pointer;
+  background:linear-gradient(120deg,#f5fbff,#effcfb);
+}
+.misi-num{
+  flex:0 0 46px;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
+  font-weight:800;font-size:1.1rem;color:#fff;background:linear-gradient(135deg,var(--biru-500),var(--toska));
+}
+.misi-card.done .misi-num{background:linear-gradient(135deg,#34c38f,#0a9a6d)}
+.misi-head h4{margin:0}
+.misi-body{padding:0 18px 18px;display:none}
+.misi-card.open .misi-body{display:block}
+
+/* ============================================================
+   KUIS
+============================================================ */
+.quiz-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:.86rem;color:var(--biru-700);margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.bar{height:9px;background:#e2eef7;border-radius:99px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--biru-500),var(--toska));transition:width .35s;border-radius:99px}
+.skor-besar{font-size:3rem;font-weight:800;line-height:1;background:linear-gradient(120deg,var(--biru-700),var(--toska));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ============================================================
+   PROYEK
+============================================================ */
+.proyek-grid{display:grid;gap:14px}
+textarea{resize:vertical;min-height:90px;line-height:1.6}
+.rubrik{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+.rubrik th,.rubrik td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+.rubrik th{background:#f2f9fe;color:var(--biru-700);font-weight:800}
+.rubrik td:last-child{font-weight:800;color:var(--biru-700);white-space:nowrap}
+
+/* ============================================================
+   LENCANA
+============================================================ */
+.lencana-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.lencana{
+  text-align:center;border-radius:16px;padding:16px 10px;border:2px dashed var(--line);
+  background:#f9fcff;color:var(--teks-soft);
+}
+.lencana.on{border:2px solid var(--oranye);background:linear-gradient(160deg,#fff8ee,#fff1e0);color:var(--teks);box-shadow:0 10px 24px rgba(224,111,0,.16)}
+.lencana .ikon{font-size:2rem;line-height:1;margin-bottom:6px;filter:grayscale(1);opacity:.45}
+.lencana.on .ikon{filter:none;opacity:1}
+.lencana .nama{font-size:.8rem;font-weight:800}
+
+/* ============================================================
+   MODAL
+============================================================ */
+.modal{
+  position:fixed;inset:0;z-index:200;background:rgba(6,43,74,.55);
+  display:grid;place-items:center;padding:18px;overflow-y:auto;
+  backdrop-filter:blur(3px);
+}
+.modal-box{
+  background:#fff;border-radius:22px;max-width:760px;width:100%;
+  padding:24px;box-shadow:var(--shadow-lg);max-height:90vh;overflow-y:auto;
+  animation:pop .28s ease both;
+}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.modal-head h3{margin:0}
+.btn-close{border:0;background:#f1f5f9;color:var(--teks-soft);width:36px;height:36px;border-radius:10px;font-size:1.1rem;cursor:pointer;flex:0 0 auto}
+
+/* ============================================================
+   TABEL
+============================================================ */
+.tabel{width:100%;border-collapse:collapse;font-size:.87rem}
+.tabel th,.tabel td{border-bottom:1px solid var(--line);padding:10px 10px;text-align:left;vertical-align:top}
+.tabel th{background:#f2f9fe;color:var(--biru-700);font-weight:800;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+.tabel tr:hover td{background:#fafdff}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer{
+  max-width:1400px;margin:0 auto;padding:22px 20px 40px;
+}
+.footer-inner{
+  background:linear-gradient(120deg,#062b4a,#0b5ea8);color:#d9eefc;
+  border-radius:20px;padding:22px 24px;font-size:.85rem;
+}
+.footer-inner strong{color:#fff}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:10px}
+.footer-inner a{color:#8fe3dd}
+
+/* ============================================================
+   TOAST
+============================================================ */
+#toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);
+  background:#062b4a;color:#fff;padding:12px 22px;border-radius:14px;
+  font-weight:700;font-size:.88rem;z-index:500;box-shadow:0 16px 40px rgba(6,43,74,.35);
+  transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:92vw;text-align:center;
+}
+#toast.show{transform:translate(-50%,0)}
+
+/* ============================================================
+   RESPONSIF
+============================================================ */
+@media (max-width:960px){
+  .layout{flex-direction:column;padding:14px}
+  .sidebar{
+    position:fixed;left:12px;right:12px;top:72px;width:auto;flex:none;z-index:80;
+    display:none;max-height:70vh;
+  }
+  .sidebar.open{display:block}
+  .btn-icon{display:grid;place-items:center}
+  .prog-mini{width:70px}
+  .hero-card{flex-direction:column;text-align:left;align-items:flex-start}
+  .hero-emoji{align-self:flex-end;margin-top:-40px}
+}
+@media (max-width:520px){
+  .welcome-card{padding:24px 18px}
+  .card{padding:16px}
+  .stat .num{font-size:1.25rem}
+  .topbar{padding:8px 12px;gap:8px}
+  .brand small{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HALAMAN PEMBUKA ================= -->
+<div id="welcome" class="welcome">
+  <div class="welcome-card">
+    <div class="illus">🔍🌿🏫</div>
+    <h1>Jelajah Dunia Observasi!</h1>
+    <p class="sub">Belajar Teks Laporan Hasil Observasi dengan Cara Seru dan Interaktif.</p>
+
+    <div class="field">
+      <label for="inpNama">Nama Siswa</label>
+      <input id="inpNama" type="text" placeholder="Tulis nama lengkapmu..." maxlength="40" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="inpKelas">Pilih Kelas</label>
+      <select id="inpKelas">
+  <option value="">— Pilih kelas —</option>
+  <option>X AKL 1</option>
+  <option>X AKL 2</option>
+  <option>X BR 1</option>
+  <option>X BR 2</option>
+  <option>X MP 1</option>
+  <option>X MP 2</option>
+  <option>X ANIMASI</option>
+  <option>X TJKT</option>
+  <option>X KULINER</option>
+</select>
+
+    <div class="welcome-actions">
+      <button class="btn btn-primary" id="btnMulai">🚀 MULAI PETUALANGAN</button>
+      <button class="btn btn-ghost" id="btnPetunjuk">📖 PETUNJUK BELAJAR</button>
+    </div>
+
+    <p class="note">
+      Progres belajarmu disimpan di perangkat ini (localStorage). Penyimpanan lokal
+      <b>tidak otomatis tersinkronisasi</b> ke perangkat lain.
+    </p>
+  </div>
+</div>
+
+<!-- ================= SHELL APLIKASI ================= -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <button class="btn-icon" id="btnMenu" aria-label="Buka menu">☰</button>
+    <div class="brand">🔍 <div>LHO Interaktif<small>Jelajah Dunia Observasi</small></div></div>
+    <div class="topbar-right">
+      <div class="prog-mini"><i id="progMiniBar"></i></div>
+      <span class="prog-mini-text" id="progMiniText">0%</span>
+      <div class="avatar" id="avatarInisial" title="Profil siswa">S</div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="Menu pembelajaran">
+      <button class="nav-item" data-view="beranda">🏠 Beranda</button>
+      <button class="nav-item" data-view="tujuan">🎯 Tujuan Pembelajaran</button>
+      <button class="nav-item" data-view="materi">📚 Materi Interaktif</button>
+      <button class="nav-item" data-view="galeri">🖼️ Galeri Objek</button>
+      <button class="nav-item" data-view="lab">🧪 Laboratorium Bahasa</button>
+      <button class="nav-item" data-view="misi">🕵️ Misi Detektif LHO</button>
+      <button class="nav-item" data-view="kuis">📝 Kuis Interaktif</button>
+      <button class="nav-item" data-view="proyek">✍️ Proyek Menulis LHO</button>
+      <button class="nav-item" data-view="refleksi">🪞 Refleksi Pembelajaran</button>
+      <button class="nav-item" data-view="hasil">🏆 Hasil Belajar</button>
+      <div class="nav-sep"></div>
+      <button class="nav-item" data-view="guru">👩‍🏫 Halaman Guru</button>
+    </nav>
+
+    <main class="main" id="main">
+      <section class="view" id="view-beranda"></section>
+      <section class="view" id="view-tujuan"></section>
+      <section class="view" id="view-materi"></section>
+      <section class="view" id="view-galeri"></section>
+      <section class="view" id="view-lab"></section>
+      <section class="view" id="view-misi"></section>
+      <section class="view" id="view-kuis"></section>
+      <section class="view" id="view-proyek"></section>
+      <section class="view" id="view-refleksi"></section>
+      <section class="view" id="view-hasil"></section>
+      <section class="view" id="view-guru"></section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <strong>LHO INTERAKTIF – Jelajah Dunia Observasi</strong>
+      <div class="footer-grid">
+        <div>
+          <div>Mata Pelajaran: <strong>Bahasa Indonesia</strong></div>
+          <div>Kelas: <strong>X SMK / Fase E</strong></div>
+          <div>Materi: <strong>Teks Laporan Hasil Observasi</strong></div>
+        </div>
+        <div>
+          <div>Guru: <strong>Sudaryanto, S.Pd.</strong></div>
+          <div>NIPPPK: <strong>198901132024211017</strong></div>
+          <div>Sekolah: <strong>SMK Negeri 1 Batanghari</strong></div>
+        </div>
+        <div>
+          <div>Tahun Pelajaran: <strong>2026/2027</strong></div>
+          <div style="margin-top:6px">
+            <button class="btn btn-sm btn-ghost" id="btnResetProgres" style="background:rgba(255,255,255,.14);color:#fff">🗑️ Atur Ulang Progres</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= MODAL & TOAST ================= -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Judul</h3>
+      <button class="btn-close" id="modalClose" aria-label="Tutup">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   1. UTILITAS
+============================================================ */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => (
+    { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
+  ));
+}
+function shuffle(a){
+  const r = a.slice();
+  for (let i = r.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [r[i], r[j]] = [r[j], r[i]];
+  }
+  return r;
+}
+let toastTimer = null;
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+function openModal(title, html){
+  $('#modalTitle').textContent = title;
+  $('#modalBody').innerHTML = html;
+  $('#modal').classList.remove('hidden');
+}
+function closeModal(){ $('#modal').classList.add('hidden'); }
+$('#modalClose').addEventListener('click', closeModal);
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ============================================================
+   2. STATE & PENYIMPANAN
+============================================================ */
+const LS_KEY   = 'lho_interaktif_v1';
+const LS_SISWA = 'lho_siswa_v1';
+const LS_GURU  = 'lho_guru_code_v1';
+
+function defaultState(){
+  return {
+    nama: '', kelas: '', mulai: false,
+    modulSelesai: [],
+    galeriSelesai: [],
+    galeriData: {},
+    labSelesai: [],
+    misiSelesai: [],
+    kuis: { nilai: null, benar: null, total: 15, selesai: false, perbaikan: [] },
+    proyek: { judul:'', objek:'', tujuan:'', umum:'', bagian:'', manfaat:'', kesimpulan:'', sumber:'' },
+    refleksi: { a1:'', a2:'', a3:'', a4:'', a5:'', tingkat:'' },
+    lencana: []
+  };
+}
+let S = loadState();
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw){
+      const parsed = JSON.parse(raw);
+      const base = defaultState();
+      return Object.assign(base, parsed, {
+        proyek: Object.assign(base.proyek, parsed.proyek || {}),
+        refleksi: Object.assign(base.refleksi, parsed.refleksi || {}),
+        kuis: Object.assign(base.kuis, parsed.kuis || {})
+      });
+    }
+  }catch(e){ console.warn('State rusak, memakai state baru.', e); }
+  return defaultState();
+}
+function saveLight(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
+function save(){ saveLight(); syncSiswa(); updateTopbar(); }
+
+/* ---------- Daftar siswa untuk halaman guru ---------- */
+function getSiswaList(){
+  try{ return JSON.parse(localStorage.getItem(LS_SISWA)) || []; }catch(e){ return []; }
+}
+function setSiswaList(list){
+  try{ localStorage.setItem(LS_SISWA, JSON.stringify(list)); }catch(e){}
+}
+function syncSiswa(){
+  if (!S.nama) return;
+  const list = getSiswaList();
+  const key  = S.nama.trim().toLowerCase() + '|' + S.kelas;
+  const lama = list.find(x => x.key === key) || {};
+  const rec = {
+    key,
+    nama: S.nama,
+    kelas: S.kelas,
+    progres: hitungProgres(),
+    modul: S.modulSelesai.length,
+    galeri: S.galeriSelesai.length,
+    lab: S.labSelesai.length,
+    misi: S.misiSelesai.length,
+    lencana: S.lencana.slice(),
+    kuis: JSON.parse(JSON.stringify(S.kuis)),
+    proyek: JSON.parse(JSON.stringify(S.proyek)),
+    refleksi: JSON.parse(JSON.stringify(S.refleksi)),
+    nilaiGuru: lama.nilaiGuru != null ? lama.nilaiGuru : null,
+    komentarGuru: lama.komentarGuru || '',
+    updatedAt: Date.now()
+  };
+  const i = list.findIndex(x => x.key === key);
+  if (i >= 0) list[i] = rec; else list.push(rec);
+  setSiswaList(list);
+}
+
+/* ============================================================
+   3. PROGRES & LENCANA
+============================================================ */
+const TOTAL_MODUL = 6, TOTAL_GALERI = 7, TOTAL_LAB = 6, TOTAL_MISI = 5;
+
+function proyekLengkap(){
+  const p = S.proyek;
+  return !!(p.judul.trim() && p.objek.trim() && p.umum.trim() && p.bagian.trim() && p.kesimpulan.trim());
+}
+function hitungProgres(){
+  const bagian = [
+    S.modulSelesai.length / TOTAL_MODUL,
+    S.galeriSelesai.length / TOTAL_GALERI,
+    S.labSelesai.length / TOTAL_LAB,
+    S.misiSelesai.length / TOTAL_MISI,
+    S.kuis.selesai ? 1 : 0,
+    proyekLengkap() ? 1 : 0,
+    S.refleksi.tingkat ? 1 : 0
+  ];
+  const rata = bagian.reduce((a, b) => a + b, 0) / bagian.length;
+  return Math.round(rata * 100);
+}
+const LENCANA_MAP = {
+  1: { nama: 'Lencana Pengamat Pemula', ikon: '🔎' },
+  2: { nama: 'Lencana Ahli Struktur',   ikon: '🧩' },
+  3: { nama: 'Lencana Detektif Fakta',  ikon: '🕵️' },
+  4: { nama: 'Lencana Pakar Bahasa',    ikon: '📖' },
+  5: { nama: 'Lencana Master LHO',      ikon: '🏆' }
+};
+function beriLencana(misiId){
+  const key = 'misi' + misiId;
+  if (!S.lencana.includes(key)){
+    S.lencana.push(key);
+    toast('🎉 Lencana baru: ' + LENCANA_MAP[misiId].nama);
+  }
+}
+
+/* ============================================================
+   4. DATA MATERI
+============================================================ */
+const MODUL = [
+{
+  id: 1, judul: 'Pengertian Teks LHO', ikon: '📘',
+  ringkas: 'Definisi, tujuan, fungsi, dan karakteristik teks laporan hasil observasi.',
+  isi: `
+    <p class="lead">Teks <b>Laporan Hasil Observasi (LHO)</b> adalah teks yang menyajikan informasi tentang suatu objek atau fenomena berdasarkan hasil pengamatan yang <b>sistematis</b> dan <b>faktual</b>.</p>
+    <div class="grid-2">
+      <div class="mini">
+        <h4>🎯 Tujuan</h4>
+        <ul>
+          <li>Menyampaikan informasi yang akurat tentang objek pengamatan.</li>
+          <li>Menjelaskan objek secara objektif dan terperinci.</li>
+          <li>Menjadi sumber rujukan pengetahuan yang tepercaya.</li>
+          <li>Melatih penulis berpikir sistematis, kritis, dan jujur terhadap data.</li>
+        </ul>
+      </div>
+      <div class="mini">
+        <h4>⚙️ Fungsi</h4>
+        <ul>
+          <li>Memberikan informasi faktual kepada pembaca.</li>
+          <li>Menjadi dasar pengambilan keputusan (termasuk di dunia kerja).</li>
+          <li>Mendokumentasikan data hasil pengamatan.</li>
+          <li>Sarana belajar, penelitian, dan pengembangan diri.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mini">
+      <h4>✨ Karakteristik umum</h4>
+      <p>Bersifat objektif, berdasarkan fakta hasil pengamatan, disusun sistematis,
+      menggunakan bahasa baku dan istilah yang sesuai, serta mengelompokkan objek
+      berdasarkan karakteristiknya.</p>
+    </div>
+    <div class="contoh">
+      <h4>🧪 Contoh singkat</h4>
+      <p>“Lidah buaya (<i>Aloe vera</i>) merupakan tanaman sukulen yang ditanam di teras
+      SMK Negeri 1 Batanghari. Daunnya berdaging tebal, berwarna hijau, dan bertepi
+      bergerigi. Tanaman ini dimanfaatkan sebagai bahan minuman kesehatan.”</p>
+      <p class="muted">Perhatikan: objeknya jelas, datanya hasil pengamatan, dan bahasanya baku serta objektif.</p>
+    </div>`,
+  aktivitas: { tipe:'mcq', judul:'Latihan Cepat Modul 1', items: [
+    { q:'Teks LHO disusun berdasarkan ...', opsi:['khayalan penulis','hasil pengamatan yang sistematis dan faktual','pendapat tokoh masyarakat','perasaan pembaca'], jawab:1, exp:'Teks LHO selalu bertumpu pada hasil pengamatan yang sistematis dan data yang faktual.' },
+    { q:'Berikut yang merupakan tujuan teks LHO adalah ...', opsi:['menghibur pembaca dengan cerita lucu','menyampaikan informasi objektif tentang objek pengamatan','mengajak pembaca membeli produk tertentu','menceritakan konflik antartokoh'], jawab:1, exp:'Tujuan utama LHO adalah menyampaikan informasi objektif berdasarkan hasil pengamatan.' }
+  ]}
+},
+{
+  id: 2, judul: 'Ciri-Ciri Teks LHO', ikon: '🔎',
+  ringkas: 'Enam ciri utama teks laporan hasil observasi beserta contohnya.',
+  isi: `
+    <p class="lead">Teks LHO dapat dikenali dari ciri-ciri berikut.</p>
+    <div class="grid-2">
+      <div class="mini"><h4>1️⃣ Berdasarkan fakta hasil pengamatan</h4><p>Semua informasi berasal dari pengamatan langsung atau sumber tepercaya, bukan karangan.</p></div>
+      <div class="mini"><h4>2️⃣ Bersifat objektif</h4><p>Tidak memihak, tidak memasukkan perasaan atau pendapat pribadi penulis.</p></div>
+      <div class="mini"><h4>3️⃣ Disusun secara sistematis</h4><p>Mengikuti struktur: pernyataan umum, deskripsi bagian, dan deskripsi manfaat.</p></div>
+      <div class="mini"><h4>4️⃣ Memberikan informasi yang jelas</h4><p>Menggunakan kalimat yang lugas, tidak berbelit, dan mudah dipahami pembaca.</p></div>
+      <div class="mini"><h4>5️⃣ Menggunakan bahasa baku dan istilah yang sesuai</h4><p>Memakai kata baku serta istilah teknis yang relevan dengan objek.</p></div>
+      <div class="mini"><h4>6️⃣ Mengelompokkan objek berdasarkan karakteristiknya</h4><p>Objek dijelaskan bagian demi bagian secara teratur (bentuk, warna, fungsi, dan sebagainya).</p></div>
+    </div>
+    <div class="contoh">
+      <h4>💡 Ingat!</h4>
+      <p>Kalimat <b>“Menurut saya, lidah buaya adalah tanaman paling indah”</b> <u>bukan</u> ciri teks LHO
+      karena mengandung pendapat pribadi (opini).</p>
+    </div>`,
+  aktivitas: { tipe:'match', judul:'Aktivitas: Cocokkan Ciri dengan Contohnya', items: [
+    { kiri:'Berdasarkan fakta hasil pengamatan', kanan:'Daun lidah buaya berukuran panjang 30–50 cm.' },
+    { kiri:'Bersifat objektif',                 kanan:'Laporan menyajikan data apa adanya tanpa opini penulis.' },
+    { kiri:'Disusun secara sistematis',         kanan:'Teks terdiri atas pernyataan umum, deskripsi bagian, dan deskripsi manfaat.' },
+    { kiri:'Menggunakan istilah teknis',        kanan:'Permukaan daun dilapisi kutikula dan memiliki stomata.' }
+  ]}
+},
+{
+  id: 3, judul: 'Struktur Teks LHO', ikon: '🧩',
+  ringkas: 'Pernyataan umum, deskripsi bagian, dan deskripsi manfaat.',
+  isi: `
+    <p class="lead">Struktur umum teks LHO terdiri atas tiga bagian.</p>
+    <div class="struktur-umum"><b>1. Pernyataan Umum / Klasifikasi</b><br>Berisi pengenalan dan pengelompokan objek secara garis besar. Biasanya memakai kalimat definisi seperti “merupakan”, “adalah”, atau “termasuk”.</div>
+    <div class="struktur-bagian"><b>2. Deskripsi Bagian</b><br>Berisi rincian karakteristik, bagian-bagian, sifat, atau kondisi objek yang diamati.</div>
+    <div class="struktur-manfaat"><b>3. Deskripsi Manfaat</b><br>Berisi fungsi atau manfaat objek. Bagian ini <u>dapat disesuaikan dengan isi laporan</u> dan tidak selalu menjadi bagian tersendiri dalam setiap laporan.</div>
+
+    <div class="contoh">
+      <h4>📄 Contoh Teks LHO: “Tanaman Lidah Buaya di Lingkungan Sekolah”</h4>
+      <p class="struktur-umum"><b>【Pernyataan Umum】</b> Lidah buaya (<i>Aloe vera</i>) merupakan tanaman sukulen yang banyak ditanam di lingkungan SMK Negeri 1 Batanghari. Tanaman ini termasuk kelompok tanaman obat dan sering dijadikan penghias halaman sekolah.</p>
+      <p class="struktur-bagian"><b>【Deskripsi Bagian】</b> Lidah buaya memiliki daun berdaging tebal, berwarna hijau, dan bertepi bergerigi kecil. Daun tumbuh memanjang dari pangkal tanaman dengan panjang sekitar 30–50 cm. Di dalam daun terdapat gel bening yang terasa dingin. Tanaman ini ditanam di dalam pot dan diletakkan di teras depan ruang kelas.</p>
+      <p class="struktur-manfaat"><b>【Deskripsi Manfaat】</b> Lidah buaya dimanfaatkan sebagai bahan baku minuman kesehatan, obat luka bakar ringan, dan bahan perawatan kulit. Selain itu, tanaman ini membantu menyegarkan udara di sekitar halaman sekolah.</p>
+      <p class="muted">Perhatikan: setiap bagian ditandai dengan warna berbeda agar mudah dikenali.</p>
+    </div>`,
+  aktivitas: { tipe:'mcq', judul:'Latihan Cepat Modul 3', items: [
+    { q:'Bagian teks LHO yang berisi pengenalan dan pengelompokan objek disebut ...', opsi:['deskripsi bagian','pernyataan umum / klasifikasi','deskripsi manfaat','kesimpulan'], jawab:1, exp:'Pernyataan umum (klasifikasi) berisi pengenalan dan pengelompokan objek secara garis besar.' },
+    { q:'Rincian ciri, bagian, dan kondisi objek terdapat pada bagian ...', opsi:['pernyataan umum','deskripsi bagian','deskripsi manfaat','pembuka'], jawab:1, exp:'Deskripsi bagian memuat rincian karakteristik dan kondisi objek.' },
+    { q:'Pernyataan yang tepat tentang deskripsi manfaat adalah ...', opsi:['wajib ada di setiap teks LHO','tidak boleh ditulis dalam LHO','dapat disesuaikan dengan isi laporan dan tidak selalu menjadi bagian tersendiri','selalu diletakkan di awal teks'], jawab:2, exp:'Deskripsi manfaat bersifat menyesuaikan isi laporan; tidak selalu menjadi bagian tersendiri.' }
+  ]}
+},
+{
+  id: 4, judul: 'Kaidah Kebahasaan', ikon: '📖',
+  ringkas: 'Nomina, verba relasional, verba material, istilah teknis, dan kalimat definisi/deskripsi.',
+  isi: `
+    <p class="lead">Teks LHO memiliki kaidah kebahasaan yang khas. Perhatikan penjelasan dan contoh berikut.</p>
+    <div class="grid-2">
+      <div class="mini"><h4>Kata benda (nomina)</h4><p>Kata yang menyatakan benda, orang, atau tempat.<br><i>Contoh:</i> <b>tanaman</b>, <b>daun</b>, <b>perpustakaan</b>, <b>komputer</b>.</p></div>
+      <div class="mini"><h4>Verba relasional</h4><p>Kata kerja yang menghubungkan subjek dengan keterangan/identitas.<br><i>Contoh:</i> <b>adalah</b>, <b>merupakan</b>, <b>termasuk</b>, <b>ialah</b>.</p></div>
+      <div class="mini"><h4>Verba material</h4><p>Kata kerja yang menunjukkan tindakan atau proses.<br><i>Contoh:</i> <b>mengamati</b>, <b>menyapu</b>, <b>mengukur</b>, <b>menanam</b>.</p></div>
+      <div class="mini"><h4>Istilah teknis</h4><p>Kata khusus sesuai bidang/objek yang diamati.<br><i>Contoh:</i> <b>fotosintesis</b>, <b>klorofil</b>, <b>stomata</b>, <b>jaringan lokal</b>.</p></div>
+      <div class="mini"><h4>Kalimat definisi</h4><p>Kalimat yang menjelaskan pengertian objek, biasanya memakai “adalah/merupakan”.<br><i>Contoh:</i> “Lidah buaya <b>merupakan</b> tanaman sukulen.”</p></div>
+      <div class="mini"><h4>Kalimat deskripsi</h4><p>Kalimat yang menggambarkan ciri/fenomena objek.<br><i>Contoh:</i> “Daunnya berdaging tebal dan berwarna hijau.”</p></div>
+      <div class="mini"><h4>Kata baku</h4><p>Kata sesuai kaidah bahasa Indonesia.<br><i>Contoh:</i> <b>praktik</b> (bukan praktek), <b>objek</b> (bukan obyek), <b>analisis</b> (bukan analisa).</p></div>
+      <div class="mini"><h4>Kalimat faktual</h4><p>Kalimat yang berisi pernyataan yang dapat dibuktikan kebenarannya.<br><i>Contoh:</i> “Ruang laboratorium memiliki 40 unit komputer.”</p></div>
+    </div>`,
+  aktivitas: { tipe:'mcq', judul:'Latihan Cepat Modul 4', items: [
+    { q:'Kata “merupakan” dalam teks LHO termasuk ...', opsi:['verba material','verba relasional','nomina','konjungsi'], jawab:1, exp:'“Merupakan”, “adalah”, “termasuk” adalah verba relasional.' },
+    { q:'Kalimat “Lidah buaya memiliki daun berdaging tebal” merupakan kalimat ...', opsi:['definisi','deskripsi','perintah','tanya'], jawab:1, exp:'Kalimat tersebut menggambarkan ciri objek sehingga disebut kalimat deskripsi.' },
+    { q:'Kata “klorofil” dalam teks LHO tentang tanaman termasuk ...', opsi:['kata sapaan','istilah teknis','kata seru','pronomina'], jawab:1, exp:'“Klorofil” adalah istilah teknis bidang biologi/pertanian.' }
+  ]}
+},
+{
+  id: 5, judul: 'Fakta dan Opini', ikon: '⚖️',
+  ringkas: 'Membedakan pernyataan faktual dan pernyataan opini dalam teks LHO.',
+  isi: `
+    <p class="lead">Teks LHO harus berisi <b>fakta</b>, bukan opini penulis.</p>
+    <div class="grid-2">
+      <div class="mini" style="background:#e9f8ef;border-color:#c6ecd6">
+        <h4 style="color:#0a6b3d">✅ Fakta</h4>
+        <ul>
+          <li>Dapat dibuktikan dan diverifikasi.</li>
+          <li>Bersifat objektif.</li>
+          <li>Berdasarkan data pengamatan atau sumber tepercaya.</li>
+        </ul>
+        <p><i>Contoh:</i> “Perpustakaan sekolah memiliki lebih dari 3.000 judul buku.”</p>
+      </div>
+      <div class="mini" style="background:#fdecea;border-color:#f7cdc9">
+        <h4 style="color:#a3241c">❌ Opini</h4>
+        <ul>
+          <li>Berasal dari pendapat, perasaan, atau perkiraan.</li>
+          <li>Bersifat subjektif.</li>
+          <li>Sering ditandai kata “menurut saya”, “sepertinya”, “paling”.</li>
+        </ul>
+        <p><i>Contoh:</i> “Perpustakaan itu tempat paling menyenangkan di sekolah.”</p>
+      </div>
+    </div>
+    <div class="contoh">
+      <h4>🔍 Tips cepat</h4>
+      <p>Jika sebuah pernyataan bisa diukur, dihitung, atau dicek langsung di lapangan,
+      kemungkinan besar itu <b>fakta</b>. Jika hanya bisa dirasakan atau diperdebatkan,
+      kemungkinan besar itu <b>opini</b>.</p>
+    </div>`,
+  aktivitas: { tipe:'kategori', judul:'Aktivitas: Fakta atau Opini?', kategori:['Fakta','Opini'], items: [
+    { teks:'Perpustakaan sekolah memiliki lebih dari 3.000 judul buku.', benar:'Fakta' },
+    { teks:'Perpustakaan itu tempat paling menyenangkan di sekolah.', benar:'Opini' },
+    { teks:'Ruang kelas X TKJ 1 memiliki 32 meja dan 32 kursi.', benar:'Fakta' },
+    { teks:'Menurut saya, cat ruang kelas terlalu pucat.', benar:'Opini' },
+    { teks:'Kantin sekolah buka setiap hari pukul 07.00–15.00.', benar:'Fakta' }
+  ]}
+},
+{
+  id: 6, judul: 'Langkah Menyusun Teks LHO', ikon: '✍️',
+  ringkas: 'Delapan tahap menulis laporan hasil observasi yang objektif dan sistematis.',
+  isi: `
+    <p class="lead">Ikuti delapan tahap berikut agar laporanmu runtut dan objektif.</p>
+    <div class="grid-2">
+      <div class="mini"><h4>1. Menentukan objek observasi</h4><p>Pilih objek yang menarik dan mudah diamati, misalnya tanaman sekolah, perpustakaan, atau ruang praktik jurusanmu.</p></div>
+      <div class="mini"><h4>2. Menetapkan aspek yang diamati</h4><p>Misalnya bentuk, warna, ukuran, jumlah, kondisi, dan fungsi.</p></div>
+      <div class="mini"><h4>3. Melakukan pengamatan</h4><p>Amati langsung objek atau gunakan sumber tepercaya (buku, laman resmi).</p></div>
+      <div class="mini"><h4>4. Mencatat data yang dapat diverifikasi</h4><p>Catat angka, ukuran, dan kondisi nyata di lapangan. Jangan mengarang.</p></div>
+      <div class="mini"><h4>5. Mengelompokkan dan menganalisis data</h4><p>Kelompokkan data sesuai bagian objek agar mudah disusun.</p></div>
+      <div class="mini"><h4>6. Menyusun kerangka</h4><p>Susun kerangka sesuai struktur: pernyataan umum, deskripsi bagian, deskripsi manfaat.</p></div>
+      <div class="mini"><h4>7. Menulis laporan</h4><p>Gunakan bahasa objektif, baku, dan istilah yang sesuai.</p></div>
+      <div class="mini"><h4>8. Menyunting</h4><p>Periksa isi, ejaan, dan tanda baca sebelum laporan dikumpulkan.</p></div>
+    </div>
+    <div class="contoh">
+      <h4>🏫 Contoh konteks jurusan SMK</h4>
+      <p>Kamu bisa mengamati <b>ruang praktik jurusan</b>, <b>perpustakaan</b>, <b>produk kuliner kantin</b>,
+      <b>kegiatan pelayanan bisnis ritel</b>, atau <b>perangkat komputer di laboratorium</b>.
+      Tuliskan data yang benar-benar kamu temukan, bukan perkiraan.</p>
+    </div>`,
+  aktivitas: { tipe:'mcq', judul:'Latihan Cepat Modul 6', items: [
+    { q:'Langkah pertama menyusun teks LHO adalah ...', opsi:['menyunting ejaan','menentukan objek observasi','mencetak laporan','menulis kesimpulan'], jawab:1, exp:'Sebelum mengamati, tentukan dahulu objek yang akan diobservasi.' },
+    { q:'Data yang dicatat sebaiknya ...', opsi:['data yang dapat diverifikasi','perkiraan penulis','pendapat teman sekelas','cerita dari media sosial'], jawab:0, exp:'Data LHO harus dapat diverifikasi kebenarannya.' },
+    { q:'Setelah menulis laporan, langkah berikutnya adalah ...', opsi:['langsung mencetak','menyunting isi, ejaan, dan tanda baca','menghapus data','mengganti objek'], jawab:1, exp:'Penyuntingan penting agar laporan rapi, baku, dan bebas kesalahan.' }
+  ]}
+}
+];
+
+/* ============================================================
+   5. DATA GALERI OBJEK
+============================================================ */
+const OBJEK = [
+  { id:'tanaman', nama:'Tanaman di Lingkungan Sekolah', emoji:'🌿',
+    desc:'Tanaman hias dan tanaman obat yang ditanam di halaman dan teras kelas.',
+    fakta:['Pot lidah buaya diletakkan di teras depan ruang kelas.','Daun lidah buaya berdaging tebal dan berwarna hijau.','Tanaman disiram setiap pagi oleh petugas kebersihan.'] },
+  { id:'perpustakaan', nama:'Perpustakaan Sekolah', emoji:'📚',
+    desc:'Pusat sumber belajar dengan koleksi buku pelajaran, fiksi, dan referensi kejuruan.',
+    fakta:['Koleksi lebih dari 3.000 judul buku.','Terdapat meja baca dan area diskusi.','Buka setiap hari pukul 07.00–15.00.'] },
+  { id:'labkom', nama:'Laboratorium Komputer', emoji:'💻',
+    desc:'Ruang praktik siswa jurusan Teknologi Komputer dan Jaringan.',
+    fakta:['Terdapat 40 unit komputer.','Dilengkapi 4 unit pendingin ruangan.','Tersedia jaringan internet dan proyektor.'] },
+  { id:'makanan', nama:'Produk Makanan Kantin', emoji:'🍜',
+    desc:'Aneka makanan dan minuman yang dijual di kantin sekolah.',
+    fakta:['Menu utama: nasi goreng, mie ayam, dan aneka minuman kemasan.','Harga berkisar Rp5.000–Rp12.000.','Kantin memiliki 6 meja panjang dan 24 kursi.'] },
+  { id:'ritel', nama:'Pelayanan Bisnis Ritel', emoji:'🛒',
+    desc:'Kegiatan pelayanan konsumen pada unit bisnis sekolah (business center).',
+    fakta:['Petugas melayani pembeli dengan sapaan ramah.','Terdapat papan harga dan struk pembayaran.','Barang tersusun berdasarkan kategori.'] },
+  { id:'peralatan', nama:'Peralatan Praktik Kejuruan', emoji:'🔧',
+    desc:'Peralatan yang digunakan siswa saat praktik di bengkel/ruang praktik.',
+    fakta:['Peralatan disimpan pada lemari alat.','Setiap alat memiliki nomor inventaris.','Terdapat daftar penggunaan alat (checklist).'] },
+  { id:'kebersihan', nama:'Kebersihan Lingkungan Sekolah', emoji:'🧹',
+    desc:'Kondisi kebersihan halaman, kelas, dan area umum sekolah.',
+    fakta:['Halaman disapu setiap pagi.','Tersedia tempat sampah terpisah organik dan anorganik.','Toilet dibersihkan dua kali sehari.'] }
+];
+
+/* ============================================================
+   6. KOMPONEN LATIHAN INTERAKTIF (dipakai Lab & Misi & Modul)
+============================================================ */
+
+/* --- A. Pilihan ganda bertingkat --- */
+function uiMCQ(box, items, onSelesai){
+  box.innerHTML = items.map((it, i) => `
+    <div class="lat-item" data-q="${i}">
+      <p>${i + 1}. ${esc(it.q)}</p>
+      <div class="opsi-list">
+        ${it.opsi.map((o, j) => `<button class="opsi" data-q="${i}" data-o="${j}">${'ABCDE'[j]}. ${esc(o)}</button>`).join('')}
+      </div>
+      <div class="fb" data-fb="${i}"></div>
+    </div>`).join('') +
+    `<button class="btn btn-primary" data-cek>Periksa Jawaban</button>`;
+
+  const jawaban = {};
+  box.querySelectorAll('.opsi').forEach(b => {
+    b.addEventListener('click', () => {
+      const qi = b.dataset.q;
+      jawaban[qi] = Number(b.dataset.o);
+      box.querySelectorAll(`.opsi[data-q="${qi}"]`).forEach(x => {
+        x.classList.remove('correct','wrong');
+        if (x === b) x.classList.add('correct');
+      });
+      const fb = box.querySelector(`[data-fb="${qi}"]`);
+      const benar = items[qi].jawab === Number(b.dataset.o);
+      fb.className = 'fb ' + (benar ? 'ok' : 'err');
+      fb.innerHTML = (benar ? '✔ Benar! ' : '✘ Kurang tepat. ') + esc(items[qi].exp || '');
+    });
+  });
+  box.querySelector('[data-cek]').addEventListener('click', () => {
+    let benar = 0;
+    items.forEach((it, i) => {
+      const fb = box.querySelector(`[data-fb="${i}"]`);
+      if (jawaban[i] === it.jawab){ benar++; fb.className = 'fb ok'; fb.textContent = '✔ Benar. ' + (it.exp || ''); }
+      else if (jawaban[i] === undefined){ fb.className = 'fb warn'; fb.textContent = '⚠ Belum dijawab.'; }
+      else { fb.className = 'fb err'; fb.innerHTML = '✘ Jawaban benar: <b>' + esc(it.opsi[it.jawab]) + '</b>. ' + esc(it.exp || ''); }
+    });
+    onSelesai(benar, items.length);
+  });
+}
+
+/* --- B. Klasifikasi kategori (Fakta/Opini, Nomina/Verba, dsb.) --- */
+function uiKategori(box, items, kategori, onSelesai){
+  box.innerHTML = items.map((it, i) => `
+    <div class="lat-item" data-i="${i}">
+      <p>${i + 1}. “${esc(it.teks)}”</p>
+      <div class="pill-row">
+        ${kategori.map(k => `<button class="pill" data-i="${i}" data-k="${esc(k)}">${esc(k)}</button>`).join('')}
+      </div>
+      <div class="fb" data-fb="${i}"></div>
+    </div>`).join('') +
+    `<button class="btn btn-primary" data-cek>Periksa Jawaban</button>`;
+
+  const pilih = {};
+  box.querySelectorAll('.pill').forEach(b => {
+    b.addEventListener('click', () => {
+      pilih[b.dataset.i] = b.dataset.k;
+      box.querySelectorAll(`.pill[data-i="${b.dataset.i}"]`).forEach(x => x.classList.toggle('sel', x === b));
+      const fb = box.querySelector(`[data-fb="${b.dataset.i}"]`);
+      const benar = items[b.dataset.i].benar === b.dataset.k;
+      fb.className = 'fb ' + (benar ? 'ok' : 'err');
+      fb.textContent = benar ? '✔ Tepat!' : '✘ Kurang tepat, coba pilih yang lain.';
+    });
+  });
+  box.querySelector('[data-cek]').addEventListener('click', () => {
+    let benar = 0;
+    items.forEach((it, i) => {
+      const fb = box.querySelector(`[data-fb="${i}"]`);
+      if (pilih[i] === it.benar){ benar++; fb.className = 'fb ok'; fb.textContent = '✔ Benar: ' + it.benar; }
+      else if (!pilih[i]){ fb.className = 'fb warn'; fb.textContent = '⚠ Belum dijawab.'; }
+      else { fb.className = 'fb err'; fb.textContent = '✘ Jawaban benar: ' + it.benar; }
+    });
+    onSelesai(benar, items.length);
+  });
+}
+
+/* --- C. Urutkan paragraf --- */
+function uiUrutkan(box, items, onSelesai){
+  const sumber = shuffle(items.map((it, i) => ({ ...it, _id: i })));
+  let urutan = [];
+
+  function gambar(){
+    box.innerHTML = `
+      <p class="muted">Klik paragraf sesuai urutan yang benar. Klik kembali untuk membatalkan.</p>
+      <div class="urut-target">
+        ${urutan.length
+          ? urutan.map((it, i) => `<div class="urut-chip" data-hapus="${i}"><b>${i + 1}.</b><span style="margin:0;color:inherit;font-weight:600">${esc(it.teks.slice(0, 80))}${it.teks.length > 80 ? '…' : ''}</span><span>✕</span></div>`).join('')
+          : '<span class="muted">Belum ada paragraf yang dipilih.</span>'}
+      </div>
+      <div class="urut-sumber">
+        ${sumber.map(it => `<button class="urut-card" data-add="${it._id}" ${urutan.some(u => u._id === it._id) ? 'disabled' : ''}>${esc(it.teks)}</button>`).join('')}
+      </div>
+      <div class="row">
+        <button class="btn btn-primary" data-cek>Periksa Urutan</button>
+        <button class="btn btn-ghost" data-reset>Ulangi</button>
+      </div>
+      <div class="fb" id="urutFb"></div>`;
+
+    box.querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => {
+      const it = sumber.find(x => x._id === Number(b.dataset.add));
+      urutan.push(it); gambar();
+    }));
+    box.querySelectorAll('[data-hapus]').forEach(c => c.addEventListener('click', () => {
+      urutan.splice(Number(c.dataset.hapus), 1); gambar();
+    }));
+    box.querySelector('[data-reset]').addEventListener('click', () => { urutan = []; gambar(); });
+    box.querySelector('[data-cek]').addEventListener('click', () => {
+      const fb = $('#urutFb', box);
+      if (urutan.length !== items.length){
+        fb.className = 'fb warn'; fb.textContent = '⚠ Susun seluruh paragraf terlebih dahulu.'; return;
+      }
+      let benar = 0;
+      items.forEach((it, i) => { if (urutan[i].teks === it.teks) benar++; });
+      if (benar === items.length){ fb.className = 'fb ok'; fb.textContent = '✔ Urutan sudah tepat! ' + (items[0].ket || ''); }
+      else { fb.className = 'fb err'; fb.innerHTML = '✘ Masih ada yang keliru (' + benar + '/' + items.length + ' tepat). Coba perhatikan pola: pernyataan umum → deskripsi bagian → deskripsi manfaat.'; }
+      onSelesai(benar, items.length);
+    });
+  }
+  gambar();
+}
+
+/* --- D. Pilih banyak (centang) --- */
+function uiPilihBanyak(box, items, onSelesai){
+  box.innerHTML = `
+    <p class="muted">Centang pernyataan yang sesuai.</p>
+    <div class="check-list">
+      ${items.map((it, i) => `
+        <label class="check-item" data-i="${i}">
+          <input type="checkbox" data-i="${i}">
+          <span>${esc(it.teks)}</span>
+        </label>`).join('')}
+    </div>
+    <div class="row" style="margin-top:12px"><button class="btn btn-primary" data-cek>Periksa Jawaban</button></div>
+    <div class="fb" id="pbFb"></div>`;
+
+  box.querySelectorAll('.check-item').forEach(l => {
+    l.addEventListener('click', e => {
+      if (e.target.tagName !== 'INPUT') return;
+      l.classList.toggle('on', e.target.checked);
+    });
+  });
+  box.querySelector('[data-cek]').addEventListener('click', () => {
+    let benar = 0, total = items.length;
+    items.forEach((it, i) => {
+      const cek = box.querySelector(`input[data-i="${i}"]`).checked;
+      if (cek === !!it.benar) benar++;
+    });
+    const fb = $('#pbFb', box);
+    if (benar === total){ fb.className = 'fb ok'; fb.textContent = '✔ Semua tepat! ' + total + '/' + total; }
+    else { fb.className = 'fb err'; fb.innerHTML = '✘ Masih ada kekeliruan (' + benar + '/' + total + ' tepat). Ingat: ciri teks LHO selalu berdasarkan fakta, objektif, sistematis, dan memakai istilah yang sesuai.'; }
+    onSelesai(benar, total);
+  });
+}
+
+/* --- E. Pilih struktur (dropdown per paragraf) --- */
+function uiStruktur(box, items, pilihan, onSelesai){
+  box.innerHTML = items.map((it, i) => `
+    <div class="lat-item">
+      <p>“${esc(it.teks)}”</p>
+      <select data-s="${i}" style="padding:9px 12px;border-radius:11px;border:2px solid var(--line);font-family:inherit;font-weight:700;font-size:.88rem">
+        <option value="">— Pilih bagian struktur —</option>
+        ${pilihan.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('')}
+      </select>
+      <div class="fb" data-fb="${i}"></div>
+    </div>`).join('') +
+    `<button class="btn btn-primary" data-cek>Periksa Jawaban</button>`;
+
+  box.querySelector('[data-cek]').addEventListener('click', () => {
+    let benar = 0;
+    items.forEach((it, i) => {
+      const v = box.querySelector(`select[data-s="${i}"]`).value;
+      const fb = box.querySelector(`[data-fb="${i}"]`);
+      if (v === it.benar){ benar++; fb.className = 'fb ok'; fb.textContent = '✔ Benar: ' + it.benar; }
+      else if (!v){ fb.className = 'fb warn'; fb.textContent = '⚠ Belum dipilih.'; }
+      else { fb.className = 'fb err'; fb.textContent = '✘ Jawaban benar: ' + it.benar; }
+    });
+    onSelesai(benar, items.length);
+  });
+}
+
+/* --- F. Mencocokkan (cocokkan ciri dengan contoh) --- */
+function uiMatch(box, items, onSelesai){
+  const kananAcak = shuffle(items.map(it => it.kanan));
+  box.innerHTML = items.map((it, i) => `
+    <div class="lat-item">
+      <p><b>${esc(it.kiri)}</b></p>
+      <select data-m="${i}" style="width:100%;padding:9px 12px;border-radius:11px;border:2px solid var(--line);font-family:inherit;font-size:.88rem">
+        <option value="">— Pilih contoh yang sesuai —</option>
+        ${kananAcak.map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join('')}
+      </select>
+      <div class="fb" data-fb="${i}"></div>
+    </div>`).join('') +
+    `<button class="btn btn-primary" data-cek>Periksa Jawaban</button>`;
+
+  box.querySelector('[data-cek]').addEventListener('click', () => {
+    let benar = 0;
+    items.forEach((it, i) => {
+      const v = box.querySelector(`select[data-m="${i}"]`).value;
+      const fb = box.querySelector(`[data-fb="${i}"]`);
+      if (v === it.kanan){ benar++; fb.className = 'fb ok'; fb.textContent = '✔ Tepat!'; }
+      else if (!v){ fb.className = 'fb warn'; fb.textContent = '⚠ Belum dipilih.'; }
+      else { fb.className = 'fb err'; fb.textContent = '✘ Contoh yang tepat: ' + it.kanan; }
+    });
+    onSelesai(benar, items.length);
+  });
+}
+
+/* ============================================================
+   7. DATA LABORATORIUM BAHASA
+============================================================ */
+const LAB = [
+  {
+    id:'lab1', judul:'Menyusun Paragraf Acak', ikon:'🧱',
+    ket:'Susun paragraf berikut menjadi teks laporan hasil observasi yang runtut.',
+    tipe:'urut',
+    items:[
+      { teks:'Perpustakaan SMK Negeri 1 Batanghari merupakan salah satu fasilitas yang menunjang kegiatan belajar siswa.' },
+      { teks:'Ruang perpustakaan berukuran sekitar 8 × 12 meter dan dilengkapi rak buku, meja baca, serta area diskusi.' },
+      { teks:'Koleksi perpustakaan mencapai lebih dari 3.000 judul buku yang terdiri atas buku pelajaran, fiksi, dan referensi kejuruan.' },
+      { teks:'Dengan fasilitas tersebut, perpustakaan membantu siswa memperluas wawasan dan menyelesaikan tugas praktik kejuruan.' }
+    ]
+  },
+  {
+    id:'lab2', judul:'Menempatkan Label Struktur', ikon:'🏷️',
+    ket:'Tentukan bagian struktur teks LHO untuk setiap paragraf berikut.',
+    tipe:'struktur',
+    pilihan:['Pernyataan umum / klasifikasi','Deskripsi bagian','Deskripsi manfaat'],
+    items:[
+      { teks:'Lidah buaya merupakan tanaman sukulen yang banyak ditanam di teras sekolah.', benar:'Pernyataan umum / klasifikasi' },
+      { teks:'Daunnya berdaging tebal, berwarna hijau, dan bertepi bergerigi dengan panjang 30–50 cm.', benar:'Deskripsi bagian' },
+      { teks:'Tanaman ini dimanfaatkan sebagai bahan minuman kesehatan dan perawatan kulit.', benar:'Deskripsi manfaat' }
+    ]
+  },
+  {
+    id:'lab3', judul:'Menandai Kalimat Definisi & Deskripsi', ikon:'🔖',
+    ket:'Tentukan apakah kalimat berikut merupakan kalimat definisi atau deskripsi.',
+    tipe:'kategori',
+    kategori:['Definisi','Deskripsi'],
+    items:[
+      { teks:'Lidah buaya adalah tanaman sukulen yang tahan terhadap cuaca panas.', benar:'Definisi' },
+      { teks:'Daunnya berdaging tebal dan berwarna hijau dengan panjang 30–50 cm.', benar:'Deskripsi' },
+      { teks:'Perpustakaan merupakan pusat sumber belajar di sekolah.', benar:'Definisi' },
+      { teks:'Rak buku tersusun rapi di sepanjang dinding ruangan.', benar:'Deskripsi' }
+    ]
+  },
+  {
+    id:'lab4', judul:'Mengelompokkan Fakta dan Opini', ikon:'⚖️',
+    ket:'Klasifikasikan setiap pernyataan sebagai fakta atau opini.',
+    tipe:'kategori',
+    kategori:['Fakta','Opini'],
+    items:[
+      { teks:'Laboratorium komputer memiliki 40 unit komputer.', benar:'Fakta' },
+      { teks:'Komputer di lab itu paling bagus di seluruh kota.', benar:'Opini' },
+      { teks:'Kantin sekolah menjual lima jenis minuman kemasan.', benar:'Fakta' },
+      { teks:'Menurut saya, makanan di kantin terlalu mahal.', benar:'Opini' },
+      { teks:'Halaman sekolah ditanami 12 pohon mangga.', benar:'Fakta' }
+    ]
+  },
+  {
+    id:'lab5', judul:'Mengidentifikasi Kelas Kata', ikon:'🔤',
+    ket:'Tentukan kategori kata berikut: nomina, verba relasional, atau istilah teknis.',
+    tipe:'kategori',
+    kategori:['Nomina','Verba relasional','Istilah teknis'],
+    items:[
+      { teks:'tanaman', benar:'Nomina' },
+      { teks:'adalah', benar:'Verba relasional' },
+      { teks:'fotosintesis', benar:'Istilah teknis' },
+      { teks:'daun', benar:'Nomina' },
+      { teks:'merupakan', benar:'Verba relasional' },
+      { teks:'klorofil', benar:'Istilah teknis' }
+    ]
+  },
+  {
+    id:'lab6', judul:'Memperbaiki Kalimat Tidak Baku', ikon:'🛠️',
+    ket:'Pilih perbaikan kalimat yang paling tepat dan baku.',
+    tipe:'mcq',
+    items:[
+      { q:'“Para siswa-siswa sedang melakukan pengamatan di halaman sekolah.”',
+        opsi:['Para siswa-siswa sedang melakukan pengamatan di halaman sekolah.',
+              'Para siswa sedang melakukan pengamatan di halaman sekolah.',
+              'Para siswa-siswa semuanya sedang melakukan pengamatan di halaman sekolah.'],
+        jawab:1, exp:'Kata “para” sudah bermakna jamak, sehingga tidak perlu diulang dengan “siswa-siswa”.' },
+      { q:'“Kami mengamati tentang tanaman lidah buaya.”',
+        opsi:['Kami mengamati tentang tanaman lidah buaya.',
+              'Kami mengamati tanaman lidah buaya.',
+              'Kami mengamati akan tanaman lidah buaya.'],
+        jawab:1, exp:'Kata “mengamati” tidak memerlukan preposisi “tentang” atau “akan”.' },
+      { q:'“Hasil observasi itu sangat bagus sekali.”',
+        opsi:['Hasil observasi itu sangat bagus sekali.',
+              'Hasil observasi itu sangat bagus.',
+              'Hasil observasi itu bagus sekali-kali.'],
+        jawab:1, exp:'“Sangat” dan “sekali” bermakna sama (tingkat), cukup gunakan salah satu.' },
+      { q:'“Di mana lokasi ruang praktik tersebut berada?”',
+        opsi:['Di mana lokasi ruang praktik tersebut berada?',
+              'Di mana lokasi ruang praktik tersebut?',
+              'Di manakah letak daripada lokasi ruang praktik?'],
+        jawab:1, exp:'Kata “lokasi” sudah bermakna tempat, sehingga “berada” berlebihan.' }
+    ]
+  }
+];
+
+/* ============================================================
+   8. DATA MISI DETEKTIF
+============================================================ */
+const MISI = [
+  {
+    id:1, judul:'Misi 1: Temukan Ciri-Ciri Teks LHO', ikon:'🔎',
+    tugas:'Centang pernyataan yang merupakan ciri teks laporan hasil observasi.',
+    tipe:'pilihbanyak',
+    items:[
+      { teks:'Berdasarkan fakta hasil pengamatan', benar:true },
+      { teks:'Bersifat objektif', benar:true },
+      { teks:'Menggunakan bahasa yang berlebihan dan puitis', benar:false },
+      { teks:'Disusun secara sistematis', benar:true },
+      { teks:'Berisi ajakan kepada pembaca', benar:false },
+      { teks:'Menggunakan istilah teknis sesuai objek', benar:true }
+    ]
+  },
+  {
+    id:2, judul:'Misi 2: Bongkar Struktur Teks', ikon:'🧩',
+    tugas:'Tentukan bagian struktur teks LHO pada setiap paragraf berikut.',
+    tipe:'struktur',
+    pilihan:['Pernyataan umum / klasifikasi','Deskripsi bagian','Deskripsi manfaat'],
+    items:[
+      { teks:'Laboratorium komputer SMK Negeri 1 Batanghari merupakan ruang praktik yang digunakan siswa jurusan Teknologi Komputer dan Jaringan.', benar:'Pernyataan umum / klasifikasi' },
+      { teks:'Ruang ini memiliki 40 unit komputer, 4 unit pendingin ruangan, dan jaringan internet.', benar:'Deskripsi bagian' },
+      { teks:'Laboratorium ini membantu siswa berlatih instalasi jaringan dan pemrograman.', benar:'Deskripsi manfaat' }
+    ]
+  },
+  {
+    id:3, judul:'Misi 3: Temukan Fakta, Singkirkan Opini', ikon:'⚖️',
+    tugas:'Klasifikasikan setiap pernyataan sebagai fakta atau opini.',
+    tipe:'kategori',
+    kategori:['Fakta','Opini'],
+    items:[
+      { teks:'Ruang praktik memiliki 20 meja kerja.', benar:'Fakta' },
+      { teks:'Ruang praktik itu terasa paling nyaman di sekolah.', benar:'Opini' },
+      { teks:'Perpustakaan buka pukul 07.00–15.00.', benar:'Fakta' },
+      { teks:'Buku-buku di perpustakaan sepertinya membosankan.', benar:'Opini' },
+      { teks:'Kantin menjual nasi goreng seharga Rp10.000.', benar:'Fakta' },
+      { teks:'Petugas kebersihan menyapu halaman setiap pagi.', benar:'Fakta' }
+    ]
+  },
+  {
+    id:4, judul:'Misi 4: Identifikasi Kaidah Kebahasaan', ikon:'📖',
+    tugas:'Jawab pertanyaan berikut tentang kaidah kebahasaan teks LHO.',
+    tipe:'mcq',
+    items:[
+      { q:'Kalimat yang mengandung verba relasional adalah ...',
+        opsi:['Siswa mengamati tanaman lidah buaya.','Lidah buaya merupakan tanaman obat yang mudah ditanam.','Petugas kebersihan menyapu halaman.','Kami mencatat data pengamatan.','Guru menjelaskan struktur teks.'],
+        jawab:1, exp:'Kata “merupakan” adalah verba relasional.' },
+      { q:'Kata “stomata” dalam teks LHO tentang tanaman termasuk ...',
+        opsi:['kata sapaan','istilah teknis','kata seru','konjungsi','pronomina'],
+        jawab:1, exp:'“Stomata” adalah istilah teknis bidang biologi.' },
+      { q:'Kalimat definisi biasanya ditandai oleh penggunaan ...',
+        opsi:['kata kerja tindakan','kata “adalah”, “merupakan”, “ialah”','kata ajakan “mari”','kata seru','kata sapaan'],
+        jawab:1, exp:'Kalimat definisi menjelaskan pengertian objek dan sering memakai verba relasional.' },
+      { q:'Penulisan kata baku yang tepat adalah ...',
+        opsi:['praktek','obyek','analisa','praktik','aktifitas'],
+        jawab:3, exp:'Bentuk baku menurut KBBI adalah “praktik”.' }
+    ]
+  },
+  {
+    id:5, judul:'Misi 5: Susun Laporan Hasil Observasi', ikon:'🏆',
+    tugas:'Susun paragraf berikut menjadi laporan hasil observasi yang runtut.',
+    tipe:'urut',
+    items:[
+      { teks:'Kantin SMK Negeri 1 Batanghari merupakan fasilitas yang menyediakan makanan dan minuman bagi siswa dan guru.' },
+      { teks:'Kantin memiliki 6 meja panjang dan 24 kursi. Area memasak dipisahkan dari area makan.' },
+      { teks:'Menu yang dijual meliputi nasi goreng, mie ayam, dan aneka minuman kemasan dengan harga Rp5.000–Rp12.000.' },
+      { teks:'Keberadaan kantin membantu siswa memperoleh makanan bergizi selama jam sekolah.' }
+    ]
+  }
+];
+
+/* ============================================================
+   9. BANK SOAL KUIS (15 SOAL)
+============================================================ */
+const SOAL_KUIS = [
+  /* --- 3 soal pengertian & tujuan --- */
+  { q:'Pengertian teks laporan hasil observasi yang tepat adalah ...',
+    opsi:['teks yang berisi cerita imajinatif penulis',
+          'teks yang menyajikan informasi tentang suatu objek atau fenomena berdasarkan pengamatan yang sistematis dan faktual',
+          'teks yang berisi pendapat pribadi tentang suatu peristiwa',
+          'teks yang mengajak pembaca melakukan sesuatu',
+          'teks yang berisi langkah-langkah membuat sesuatu'],
+    jawab:1, exp:'LHO menyajikan informasi berdasarkan pengamatan yang sistematis dan faktual.' },
+
+  { q:'Tujuan utama teks laporan hasil observasi adalah ...',
+    opsi:['menghibur pembaca dengan kisah menarik',
+          'memengaruhi pembaca agar setuju dengan penulis',
+          'menyampaikan hasil pengamatan secara objektif dan informatif',
+          'menceritakan pengalaman pribadi penulis',
+          'mengkritik suatu kebijakan sekolah'],
+    jawab:2, exp:'Tujuan LHO adalah menyampaikan hasil pengamatan secara objektif dan informatif.' },
+
+  { q:'Berikut yang BUKAN merupakan fungsi teks laporan hasil observasi adalah ...',
+    opsi:['memberikan informasi yang akurat tentang objek',
+          'menjadi sumber rujukan ilmiah',
+          'membantu pembaca mengenal objek secara rinci',
+          'membujuk pembaca membeli produk tertentu',
+          'melatih penulis berpikir sistematis'],
+    jawab:3, exp:'Membujuk pembaca adalah fungsi teks persuasif, bukan teks LHO.' },
+
+  /* --- 3 soal ciri-ciri --- */
+  { q:'Ciri “bersifat objektif” dalam teks LHO berarti ...',
+    opsi:['berdasarkan perasaan penulis',
+          'berdasarkan data dan fakta yang dapat diverifikasi',
+          'berdasarkan cerita orang lain tanpa dicek',
+          'berdasarkan opini tokoh masyarakat',
+          'berdasarkan ramalan dan perkiraan'],
+    jawab:1, exp:'Objektif berarti bersandar pada data dan fakta yang dapat diverifikasi.' },
+
+  { q:'Pernyataan yang menunjukkan ciri teks LHO adalah ...',
+    opsi:['“Menurut saya, lidah buaya tanaman paling indah.”',
+          '“Lidah buaya memiliki daun berdaging tebal dan tepi bergerigi.”',
+          '“Sepertinya tanaman itu akan segera berbunga.”',
+          '“Saya harap kamu menyukai tanaman ini.”',
+          '“Ayo menanam lidah buaya di rumah!”'],
+    jawab:1, exp:'Pilihan B berisi deskripsi faktual objek, tanpa opini atau ajakan.' },
+
+  { q:'Teks LHO disusun secara sistematis, maksudnya ...',
+    opsi:['ditulis dengan bahasa puitis',
+          'diurutkan sesuai struktur dan kaidah yang logis',
+          'ditulis dengan kalimat yang sangat panjang',
+          'menggunakan banyak majas',
+          'diakhiri dengan kalimat ajakan'],
+    jawab:1, exp:'Sistematis berarti mengikuti struktur dan urutan yang logis.' },
+
+  /* --- 3 soal struktur --- */
+  { q:'Urutan struktur teks LHO yang tepat adalah ...',
+    opsi:['pernyataan umum – deskripsi bagian – deskripsi manfaat',
+          'orientasi – komplikasi – resolusi',
+          'tujuan – langkah – penutup',
+          'tesis – argumentasi – penegasan ulang',
+          'pembuka – isi – salam penutup'],
+    jawab:0, exp:'Struktur LHO: pernyataan umum/klasifikasi, deskripsi bagian, deskripsi manfaat.' },
+
+  { q:'Bagian teks LHO yang berisi pengenalan dan pengelompokan objek disebut ...',
+    opsi:['deskripsi bagian','pernyataan umum / klasifikasi','deskripsi manfaat','simpulan','orientasi'],
+    jawab:1, exp:'Pernyataan umum/klasifikasi berisi pengenalan dan pengelompokan objek.' },
+
+  { q:'Kutipan “Lidah buaya dapat dimanfaatkan sebagai bahan baku minuman kesehatan dan perawatan kulit.” termasuk bagian ...',
+    opsi:['pernyataan umum','deskripsi bagian','deskripsi manfaat','orientasi','koda'],
+    jawab:2, exp:'Kutipan tersebut menjelaskan manfaat objek, sehingga termasuk deskripsi manfaat.' },
+
+  /* --- 3 soal kaidah kebahasaan --- */
+  { q:'Kalimat berikut yang mengandung verba relasional adalah ...',
+    opsi:['Siswa mengamati tanaman lidah buaya.',
+          'Lidah buaya merupakan tanaman obat yang mudah ditanam.',
+          'Petugas kebersihan menyapu halaman.',
+          'Kami mencatat data pengamatan.',
+          'Guru menjelaskan struktur teks.'],
+    jawab:1, exp:'Kata “merupakan” adalah verba relasional.' },
+
+  { q:'Kalimat definisi dalam teks LHO ditandai dengan penggunaan ...',
+    opsi:['kata kerja tindakan','kata “adalah”, “merupakan”, “ialah”','kata ajakan “mari”','kata seru','kata sapaan'],
+    jawab:1, exp:'Kalimat definisi umumnya memakai verba relasional seperti “adalah/merupakan/ialah”.' },
+
+  { q:'Kata “fotosintesis”, “klorofil”, dan “stomata” dalam teks LHO tentang tanaman termasuk ...',
+    opsi:['kata sapaan','istilah teknis','kata seru','konjungsi','pronomina'],
+    jawab:1, exp:'Ketiganya merupakan istilah teknis bidang biologi/pertanian.' },
+
+  /* --- 3 soal analisis teks, fakta-opini, penerapan --- */
+  { q:'Pernyataan berikut yang merupakan OPINI adalah ...',
+    opsi:['Perpustakaan sekolah memiliki 3.500 judul buku.',
+          'Ruang laboratorium komputer dilengkapi 40 unit komputer.',
+          'Kantin sekolah tampaknya paling nyaman di seluruh kota.',
+          'Halaman sekolah ditanami 12 pohon mangga.',
+          'Toilet sekolah dibersihkan setiap pagi.'],
+    jawab:2, exp:'Kata “tampaknya” dan “paling” menunjukkan penilaian pribadi sehingga bersifat opini.' },
+
+  { q:'Kalimat berikut yang TIDAK baku dan perlu diperbaiki adalah ...',
+    opsi:['Siswa melakukan pengamatan di laboratorium.',
+          'Pihak sekolah telah menyediakan fasilitas yang memadai.',
+          'Para siswa-siswa sedang praktik di bengkel.',
+          'Laporan disusun berdasarkan data pengamatan.',
+          'Objek diamati secara saksama.'],
+    jawab:2, exp:'Kata “para” sudah bermakna jamak, sehingga “siswa-siswa” menjadi berlebihan (tidak baku).' },
+
+  { q:'Kamu mengamati ruang praktik jurusan. Data yang paling tepat dicatat untuk laporan LHO adalah ...',
+    opsi:['“Ruang praktiknya keren banget dan bikin semangat.”',
+          '“Ruang praktik memiliki 20 meja kerja, 4 lemari alat, dan ventilasi di kedua sisi.”',
+          '“Katanya ruang praktik akan dipindah tahun depan.”',
+          '“Saya rasa ruang praktik perlu ditambah AC.”',
+          '“Ruang praktik paling nyaman di sekolah ini.”'],
+    jawab:1, exp:'Data LHO harus berupa fakta terukur yang dapat diverifikasi, bukan opini atau kabar.' }
+];
+
+/* ============================================================
+   10. NAVIGASI
+============================================================ */
+const VIEWS = {};
+let currentView = 'beranda';
+
+function goto(view){
+  currentView = view;
+  $$('.view').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('view-' + view);
+  if (el) el.classList.add('active');
+  $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+  if (VIEWS[view]) VIEWS[view]();
+  $('#sidebar').classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+$$('.nav-item').forEach(b => b.addEventListener('click', () => goto(b.dataset.view)));
+$('#btnMenu').addEventListener('click', () => $('#sidebar').classList.toggle('open'));
+$('#avatarInisial').addEventListener('click', () => goto('hasil'));
+
+function updateTopbar(){
+  const p = hitungProgres();
+  const bar = $('#progMiniBar'), txt = $('#progMiniText'), av = $('#avatarInisial');
+  if (bar) bar.style.width = p + '%';
+  if (txt) txt.textContent = p + '%';
+  if (av) av.textContent = (S.nama || 'S').trim().charAt(0).toUpperCase();
+}
+
+/* ============================================================
+   11. VIEW: BERANDA
+============================================================ */
+VIEWS.beranda = function(){
+  const p = hitungProgres();
+  const el = $('#view-beranda');
+  el.innerHTML = `
+    <div class="hero-card">
+      <div>
+        <p class="eyebrow">Selamat datang,</p>
+        <h2>${esc(S.nama || 'Siswa')} 👋</h2>
+        <p style="margin:6px 0 0">Kelas ${esc(S.kelas || '-')} • Bahasa Indonesia • Fase E</p>
+        <p style="margin:10px 0 0;max-width:520px">Ayo jelajahi dunia observasi! Amati objek di sekitarmu,
+        temukan fakta, dan susun laporan hasil observasi yang objektif.</p>
+      </div>
+      <div class="hero-emoji">🔍</div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="num">${p}%</div><div class="lbl">Progres Belajar</div></div>
+      <div class="stat"><div class="num">${S.misiSelesai.length}/${TOTAL_MISI}</div><div class="lbl">Misi Selesai</div></div>
+      <div class="stat"><div class="num">${S.kuis.selesai ? S.kuis.nilai : '—'}</div><div class="lbl">Skor Kuis</div></div>
+      <div class="stat"><div class="num">${S.lencana.length}</div><div class="lbl">Lencana</div></div>
+    </div>
+
+    <div class="card">
+      <div class="row-between">
+        <h3 style="margin:0">📊 Progres Pembelajaran</h3>
+        <span class="chip">${S.modulSelesai.length}/${TOTAL_MODUL} modul selesai</span>
+      </div>
+      <div class="ring-wrap" style="margin-top:10px">
+        <div class="ring" style="--p:${p}"><span>${p}%</span></div>
+        <div style="flex:1;min-width:200px">
+          <p style="margin:0"><b>Teruskan, kamu sudah di jalur yang tepat!</b></p>
+          <p class="muted" style="margin:4px 0 0">
+            Modul ${S.modulSelesai.length}/${TOTAL_MODUL} •
+            Galeri ${S.galeriSelesai.length}/${TOTAL_GALERI} •
+            Lab ${S.labSelesai.length}/${TOTAL_LAB} •
+            Misi ${S.misiSelesai.length}/${TOTAL_MISI}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🚀 Lanjutkan Belajar</h3>
+      <div class="row" style="margin-top:10px">
+        <button class="btn btn-primary" data-go="materi">📚 Materi Interaktif</button>
+        <button class="btn btn-orange" data-go="misi">🕵️ Misi Detektif</button>
+        <button class="btn btn-ghost" data-go="kuis">📝 Kuis Interaktif</button>
+        <button class="btn btn-ghost" data-go="galeri">🖼️ Galeri Objek</button>
+        <button class="btn btn-ghost" data-go="proyek">✍️ Proyek Menulis</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🏅 Lencana Pencapaian</h3>
+      <div class="lencana-grid" style="margin-top:10px">
+        ${Object.entries(LENCANA_MAP).map(([id, l]) => `
+          <div class="lencana ${S.lencana.includes('misi' + id) ? 'on' : ''}">
+            <div class="ikon">${l.ikon}</div>
+            <div class="nama">${esc(l.nama)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  el.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => goto(b.dataset.go)));
+};
+
+/* ============================================================
+   12. VIEW: TUJUAN PEMBELAJARAN
+============================================================ */
+const TUJUAN = [
+  'Menjelaskan pengertian dan tujuan teks laporan hasil observasi.',
+  'Mengidentifikasi ciri-ciri teks laporan hasil observasi.',
+  'Menganalisis struktur teks laporan hasil observasi.',
+  'Mengidentifikasi kaidah kebahasaan teks laporan hasil observasi.',
+  'Membedakan fakta dan opini dalam teks laporan hasil observasi.',
+  'Menyusun teks laporan hasil observasi berdasarkan data pengamatan yang objektif dan sistematis.',
+  'Menyajikan hasil observasi secara tertulis atau dalam bentuk presentasi digital.'
+];
+VIEWS.tujuan = function(){
+  $('#view-tujuan').innerHTML = `
+    <div class="card">
+      <h2>🎯 Tujuan Pembelajaran</h2>
+      <p class="muted">Setelah mengikuti pembelajaran, siswa mampu:</p>
+      <div class="grid-2" style="margin-top:14px">
+        ${TUJUAN.map((t, i) => `
+          <div class="mini" style="display:flex;gap:12px;align-items:flex-start">
+            <div style="flex:0 0 30px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+              background:linear-gradient(135deg,var(--biru-500),var(--toska));color:#fff;font-weight:800;font-size:.85rem">${i + 1}</div>
+            <p style="margin:0">${esc(t)}</p>
+          </div>`).join('')}
+      </div>
+      <div class="contoh" style="margin-top:16px">
+        <h4>💡 Cara belajar yang disarankan</h4>
+        <p>Pelajari modul secara berurutan → amati objek di galeri → latih kemampuan di Laboratorium Bahasa →
+        selesaikan Misi Detektif → kerjakan Kuis → tulis Proyek LHO → isi Refleksi → lihat Hasil Belajar.</p>
+      </div>
+    </div>`;
+};
+
+/* ============================================================
+   13. VIEW: MATERI INTERAKTIF
+============================================================ */
+let materiAktif = null;
+
+VIEWS.materi = function(){
+  const el = $('#view-materi');
+
+  if (!materiAktif){
+    el.innerHTML = `
+      <div class="card">
+        <h2>📚 Materi Interaktif</h2>
+        <p class="muted">Buka modul satu per satu. Setiap modul dilengkapi latihan cepat.</p>
+      </div>
+      ${MODUL.map(m => {
+        const selesai = S.modulSelesai.includes(m.id);
+        return `
+        <div class="modul-card">
+          <div class="modul-ikon">${m.ikon}</div>
+          <div class="modul-body">
+            <div class="row-between" style="margin-bottom:4px">
+              <h4>Modul ${m.id}: ${esc(m.judul)}</h4>
+              ${selesai ? '<span class="chip green">✔ Selesai</span>' : '<span class="chip gray">Belum dibuka</span>'}
+            </div>
+            <p class="muted" style="margin:0 0 10px">${esc(m.ringkas)}</p>
+            <button class="btn btn-primary btn-sm" data-modul="${m.id}">
+              ${selesai ? 'Buka Kembali' : 'Buka Modul'} →
+            </button>
+          </div>
+        </div>`;
+      }).join('')}`;
+    el.querySelectorAll('[data-modul]').forEach(b =>
+      b.addEventListener('click', () => { materiAktif = Number(b.dataset.modul); VIEWS.materi(); window.scrollTo({top:0,behavior:'smooth'}); }));
+    return;
+  }
+
+  const m = MODUL.find(x => x.id === materiAktif);
+  const selesai = S.modulSelesai.includes(m.id);
+
+  el.innerHTML = `
+    <div class="row-between">
+      <button class="btn btn-ghost btn-sm" id="btnBackModul">← Kembali ke daftar modul</button>
+      <span class="chip">Modul ${m.id} dari ${TOTAL_MODUL}</span>
+    </div>
+    <div class="card">
+      <h2>${m.ikon} Modul ${m.id}: ${esc(m.judul)}</h2>
+      ${m.isi}
+    </div>
+    <div class="card">
+      <h3>🧠 ${esc(m.aktivitas.judul)}</h3>
+      <div id="boxAktivitas"></div>
+    </div>
+    <div class="card center">
+      <p>Selesai memahami modul ini? Tandai agar progres belajarmu bertambah.</p>
+      <button class="btn btn-primary" id="btnTandaiModul" ${selesai ? 'disabled' : ''}>
+        ${selesai ? '✔ Modul sudah ditandai selesai' : '✅ Tandai Modul Selesai'}
+      </button>
+    </div>`;
+
+  $('#btnBackModul').addEventListener('click', () => { materiAktif = null; VIEWS.materi(); });
+
+  const box = $('#boxAktivitas');
+  const a = m.aktivitas;
+  const onDone = (benar, total) => {
+    if (benar === total) toast('🎉 Hebat! Semua jawaban tepat.');
+    else toast('Sudah dicoba! Baca kembali penjelasannya, ya.');
+  };
+  if (a.tipe === 'mcq') uiMCQ(box, a.items, onDone);
+  else if (a.tipe === 'kategori') uiKategori(box, a.items, a.kategori, onDone);
+  else if (a.tipe === 'match') uiMatch(box, a.items, onDone);
+
+  $('#btnTandaiModul').addEventListener('click', () => {
+    if (!S.modulSelesai.includes(m.id)){
+      S.modulSelesai.push(m.id);
+      save();
+      toast('✅ Modul ' + m.id + ' ditandai selesai.');
+    }
+    VIEWS.materi();
+  });
+};
+
+/* ============================================================
+   14. VIEW: GALERI OBJEK OBSERVASI
+============================================================ */
+VIEWS.galeri = function(){
+  const el = $('#view-galeri');
+  el.innerHTML = `
+    <div class="card">
+      <h2>🖼️ Galeri Objek Observasi</h2>
+      <p class="muted">Pilih objek, lalu tekan <b>AMATI OBJEK</b> untuk mengisi lembar pengamatan digital.
+      Objek yang sudah diamati akan ditandai selesai.</p>
+      <span class="chip">${S.galeriSelesai.length}/${TOTAL_GALERI} objek diamati</span>
+    </div>
+    <div class="galeri-grid">
+      ${OBJEK.map(o => `
+        <div class="objek-card">
+          <div class="objek-visual">${o.emoji}</div>
+          <div class="objek-body">
+            <div class="row-between" style="margin:0;gap:6px">
+              <h4>${esc(o.nama)}</h4>
+              ${S.galeriSelesai.includes(o.id) ? '<span class="chip green" style="font-size:.68rem">✔</span>' : ''}
+            </div>
+            <p class="muted" style="margin:0;font-size:.84rem">${esc(o.desc)}</p>
+            <ul class="fakta">${o.fakta.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+            <button class="btn btn-orange btn-sm" data-objek="${o.id}">🔍 AMATI OBJEK</button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  el.querySelectorAll('[data-objek]').forEach(b =>
+    b.addEventListener('click', () => bukaLembarObservasi(b.dataset.objek)));
+};
+
+function bukaLembarObservasi(id){
+  const o = OBJEK.find(x => x.id === id);
+  const d = S.galeriData[id] || { ciri:'', bagian:'', fungsi:'', fakta:'', kesimpulan:'' };
+  openModal('🔍 Lembar Pengamatan: ' + o.nama, `
+    <p class="muted">Isi lembar ini berdasarkan pengamatanmu. Gunakan bahasa yang baku dan objektif.</p>
+    <div class="proyek-grid">
+      <div class="field"><label>Nama objek</label>
+        <input id="obsObjek" type="text" value="${esc(o.nama)}" readonly></div>
+      <div class="field"><label>Ciri-ciri objek</label>
+        <textarea id="obsCiri" placeholder="Contoh: berwarna hijau, berukuran ±50 cm, permukaan licin...">${esc(d.ciri)}</textarea></div>
+      <div class="field"><label>Bagian-bagian objek</label>
+        <textarea id="obsBagian" placeholder="Contoh: daun, batang, akar, pot...">${esc(d.bagian)}</textarea></div>
+      <div class="field"><label>Fungsi atau manfaat</label>
+        <textarea id="obsFungsi" placeholder="Contoh: digunakan sebagai bahan minuman kesehatan...">${esc(d.fungsi)}</textarea></div>
+      <div class="field"><label>Fakta hasil pengamatan</label>
+        <textarea id="obsFakta" placeholder="Tuliskan data yang dapat diverifikasi (jumlah, ukuran, kondisi)...">${esc(d.fakta)}</textarea></div>
+      <div class="field"><label>Kesimpulan sementara</label>
+        <textarea id="obsKesimpulan" placeholder="Contoh: tanaman ini tumbuh baik di teras kelas...">${esc(d.kesimpulan)}</textarea></div>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary" id="btnSimpanObservasi">💾 Simpan Pengamatan</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Tutup</button>
+    </div>
+    <p class="note">Ingat: jangan mengarang fakta. Tuliskan apa yang benar-benar kamu amati.</p>
+  `);
+
+  $('#btnSimpanObservasi').addEventListener('click', () => {
+    S.galeriData[id] = {
+      ciri: $('#obsCiri').value.trim(),
+      bagian: $('#obsBagian').value.trim(),
+      fungsi: $('#obsFungsi').value.trim(),
+      fakta: $('#obsFakta').value.trim(),
+      kesimpulan: $('#obsKesimpulan').value.trim()
+    };
+    if (!S.galeriSelesai.includes(id)) S.galeriSelesai.push(id);
+    save();
+    closeModal();
+    toast('✅ Lembar pengamatan tersimpan.');
+    VIEWS.galeri();
+  });
+}
+
+/* ============================================================
+   15. VIEW: LABORATORIUM BAHASA
+============================================================ */
+VIEWS.lab = function(){
+  const el = $('#view-lab');
+  el.innerHTML = `
+    <div class="card">
+      <h2>🧪 Laboratorium Bahasa</h2>
+      <p class="muted">Latih keterampilan berbahasamu. Setiap latihan memberi umpan balik dan penjelasan langsung.</p>
+      <span class="chip">${S.labSelesai.length}/${TOTAL_LAB} latihan diselesaikan</span>
+    </div>
+    ${LAB.map(l => `
+      <div class="card">
+        <div class="row-between" style="margin-bottom:6px">
+          <h3 style="margin:0">${l.ikon} ${esc(l.judul)}</h3>
+          ${S.labSelesai.includes(l.id) ? '<span class="chip green">✔ Selesai</span>' : ''}
+        </div>
+        <p class="muted" style="margin:0 0 12px">${esc(l.ket)}</p>
+        <div id="lab-${l.id}"></div>
+      </div>`).join('')}`;
+
+  LAB.forEach(l => {
+    const box = document.getElementById('lab-' + l.id);
+    const done = (benar, total) => {
+      if (benar === total){
+        if (!S.labSelesai.includes(l.id)){ S.labSelesai.push(l.id); save(); toast('✅ Latihan selesai: ' + l.judul); VIEWS.lab(); }
+      }
+    };
+    if (l.tipe === 'mcq') uiMCQ(box, l.items, done);
+    else if (l.tipe === 'kategori') uiKategori(box, l.items, l.kategori, done);
+    else if (l.tipe === 'struktur') uiStruktur(box, l.items, l.pilihan, done);
+    else if (l.tipe === 'urut') uiUrutkan(box, l.items, done);
+  });
+};
+
+/* ============================================================
+   16. VIEW: MISI DETEKTIF LHO
+============================================================ */
+VIEWS.misi = function(){
+  const el = $('#view-misi');
+  el.innerHTML = `
+    <div class="hero-card" style="background:linear-gradient(120deg,#0f3d63,#0b5ea8 50%,#0a9a94)">
+      <div>
+        <p class="eyebrow">🕵️ Cerita Misi</p>
+        <h2 style="margin:4px 0 8px">Kamu adalah Detektif Observasi!</h2>
+        <p style="max-width:560px;margin:0">Kamu mendapat tugas menyelidiki berbagai objek di lingkungan sekolah.
+        Selesaikan setiap misi untuk menjadi <b>Ahli LHO</b>. Tidak ada hukuman skor — cobalah sebanyak yang kamu mau!</p>
+      </div>
+      <div class="hero-emoji">🕵️</div>
+    </div>
+
+    <div class="card">
+      <div class="row-between">
+        <span class="chip">${S.misiSelesai.length}/${TOTAL_MISI} misi selesai</span>
+        <span class="chip orange">${S.lencana.length}/5 lencana</span>
+      </div>
+    </div>
+    ${MISI.map(m => `
+      <div class="misi-card ${S.misiSelesai.includes(m.id) ? 'done' : ''}" data-misi="${m.id}">
+        <div class="misi-head" data-toggle="${m.id}">
+          <div class="misi-num">${S.misiSelesai.includes(m.id) ? '✔' : m.id}</div>
+          <div style="flex:1">
+            <h4>${esc(m.judul)}</h4>
+            <p class="muted" style="margin:0;font-size:.85rem">${esc(m.tugas)}</p>
+          </div>
+          <span class="chip ${S.misiSelesai.includes(m.id) ? 'green' : 'gray'}">
+            ${S.misiSelesai.includes(m.id) ? 'Selesai' : 'Buka'}
+          </span>
+        </div>
+        <div class="misi-body">
+          <div id="misi-box-${m.id}"></div>
+        </div>
+      </div>`).join('')}
+
+    <div class="card">
+      <h3>🏅 Penghargaan</h3>
+      <div class="lencana-grid" style="margin-top:10px">
+        ${Object.entries(LENCANA_MAP).map(([id, l]) => `
+          <div class="lencana ${S.lencana.includes('misi' + id) ? 'on' : ''}">
+            <div class="ikon">${l.ikon}</div>
+            <div class="nama">${esc(l.nama)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+
+  el.querySelectorAll('[data-toggle]').forEach(h => {
+    h.addEventListener('click', () => {
+      h.parentElement.classList.toggle('open');
+    });
+  });
+
+  MISI.forEach(m => {
+    const box = document.getElementById('misi-box-' + m.id);
+    const done = (benar, total) => {
+      if (benar === total){
+        if (!S.misiSelesai.includes(m.id)){
+          S.misiSelesai.push(m.id);
+          beriLencana(m.id);
+          save();
+          toast('🏅 ' + LENCANA_MAP[m.id].nama + ' diperoleh!');
+          VIEWS.misi();
+          document.querySelector(`[data-misi="${m.id}"]`)?.classList.add('open');
+        }
+      }
+    };
+    if (m.tipe === 'mcq') uiMCQ(box, m.items, done);
+    else if (m.tipe === 'kategori') uiKategori(box, m.items, m.kategori, done);
+    else if (m.tipe === 'struktur') uiStruktur(box, m.items, m.pilihan, done);
+    else if (m.tipe === 'urut') uiUrutkan(box, m.items, done);
+    else if (m.tipe === 'pilihbanyak') uiPilihBanyak(box, m.items, done);
+  });
+};
+
+/* ============================================================
+   17. VIEW: KUIS INTERAKTIF
+============================================================ */
+let KS = null;
+
+VIEWS.kuis = function(){
+  const el = $('#view-kuis');
+
+  if (!KS){
+    el.innerHTML = `
+      <div class="card">
+        <h2>📝 Kuis Interaktif</h2>
+        <p class="muted">15 soal pilihan ganda (A–E) mencakup pengertian, ciri, struktur, kaidah kebahasaan,
+        serta analisis teks dan fakta-opini. Soal dan pilihan diacak setiap kali kuis dimulai.</p>
+        <div class="grid-2" style="margin-top:12px">
+          <div class="mini"><h4>📌 Ketentuan</h4>
+            <ul>
+              <li>Kunci jawaban tidak ditampilkan sebelum kamu menjawab.</li>
+              <li>Pembahasan muncul setelah setiap jawaban.</li>
+              <li>Skor = (jumlah benar ÷ 15) × 100.</li>
+            </ul>
+          </div>
+          <div class="mini"><h4>🏁 Hasil terakhirmu</h4>
+            ${S.kuis.selesai
+              ? `<p style="margin:0"><span class="skor-besar">${S.kuis.nilai}</span></p>
+                 <p class="muted" style="margin:4px 0 0">Benar ${S.kuis.benar} dari ${S.kuis.total} soal</p>`
+              : '<p class="muted" style="margin:0">Belum mengerjakan kuis.</p>'}
+          </div>
+        </div>
+        <div class="row" style="margin-top:16px">
+          <button class="btn btn-primary" id="btnMulaiKuis">▶ Mulai Kuis</button>
+        </div>
+      </div>`;
+    $('#btnMulaiKuis').addEventListener('click', mulaiKuis);
+    return;
+  }
+
+  /* ---- Soal sedang berjalan ---- */
+  const s = KS.list[KS.idx];
+  const persen = Math.round((KS.idx / KS.list.length) * 100);
+
+  el.innerHTML = `
+    <div class="card">
+      <div class="quiz-head">
+        <span>Soal ${KS.idx + 1} dari ${KS.list.length}</span>
+        <span>✅ Benar: ${KS.benar}</span>
+      </div>
+      <div class="bar"><i style="width:${persen}%"></i></div>
+      <h3 style="margin-top:6px">${esc(s.q)}</h3>
+      <div class="opsi-list" id="opsiBox">
+        ${s.opts.map((o, i) => `<button class="opsi" data-i="${i}">${'ABCDE'[i]}. ${esc(o.t)}</button>`).join('')}
+      </div>
+      <div class="fb" id="kuisFb" style="margin-top:12px"></div>
+      <div class="row" style="margin-top:14px" id="kuisNav"></div>
+    </div>`;
+
+  $('#opsiBox').querySelectorAll('.opsi').forEach(b => {
+    b.addEventListener('click', () => jawabKuis(Number(b.dataset.i)));
+  });
+};
+
+function mulaiKuis(){
+  const list = shuffle(SOAL_KUIS.map(s => {
+    const opts = shuffle(s.opsi.map((t, i) => ({ t, benar: i === s.jawab })));
+    return { q: s.q, opts, exp: s.exp };
+  }));
+  KS = { list, idx: 0, benar: 0, log: [] };
+  VIEWS.kuis();
+}
+
+function jawabKuis(pilihan){
+  const s = KS.list[KS.idx];
+  const benarIdx = s.opts.findIndex(o => o.benar);
+  const tepat = pilihan === benarIdx;
+  if (tepat) KS.benar++;
+  KS.log.push({ q: s.q, tepat, jawaban: s.opts[pilihan].t, benar: s.opts[benarIdx].t, exp: s.exp });
+
+  const buttons = $('#opsiBox').querySelectorAll('.opsi');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === benarIdx) b.classList.add('correct');
+    else if (i === pilihan) b.classList.add('wrong');
+  });
+
+  const fb = $('#kuisFb');
+  fb.className = 'fb ' + (tepat ? 'ok' : 'err');
+  fb.innerHTML = (tepat ? '✔ <b>Tepat!</b> ' : '✘ <b>Kurang tepat.</b> Jawaban benar: <b>' + esc(s.opts[benarIdx].t) + '</b>. ')
+    + '<br><span style="font-weight:600;color:var(--teks-soft)">' + esc(s.exp) + '</span>';
+
+  const nav = $('#kuisNav');
+  nav.innerHTML = `<button class="btn btn-primary" id="btnLanjut">
+    ${KS.idx + 1 < KS.list.length ? 'Soal Berikutnya →' : 'Lihat Hasil Akhir 🏁'}
+  </button>`;
+  $('#btnLanjut').addEventListener('click', () => {
+    if (KS.idx + 1 < KS.list.length){ KS.idx++; VIEWS.kuis(); }
+    else selesaikanKuis();
+  });
+}
+
+function selesaikanKuis(){
+  const total = KS.list.length;
+  const nilai = Math.round((KS.benar / total) * 100);
+  S.kuis = {
+    nilai, benar: KS.benar, total, selesai: true,
+    perbaikan: KS.log.filter(x => !x.tepat).map(x => x.q)
+  };
+  save();
+  KS = null;
+  VIEWS.kuisHasil(nilai, total);
+}
+
+VIEWS.kuisHasil = function(nilai, total){
+  const benar = S.kuis.benar;
+  let saran;
+  if (nilai >= 90) saran = 'Luar biasa! Kamu sudah sangat memahami teks LHO. Lanjutkan dengan memperdalam analisis teks.';
+  else if (nilai >= 75) saran = 'Bagus! Pelajari kembali bagian yang masih keliru, lalu coba kuis sekali lagi.';
+  else if (nilai >= 60) saran = 'Cukup baik. Baca ulang Modul 3 (struktur) dan Modul 4 (kaidah kebahasaan), lalu ulangi kuis.';
+  else saran = 'Jangan menyerah! Mulailah dari Modul 1 dan 2, lalu latihan di Laboratorium Bahasa sebelum mengulang kuis.';
+
+  $('#view-kuis').innerHTML = `
+    <div class="card center">
+      <h2>🏁 Kuis Selesai!</h2>
+      <p><span class="skor-besar">${nilai}</span></p>
+      <p class="muted">Benar <b>${benar}</b> dari <b>${total}</b> soal</p>
+      <div class="bar" style="max-width:340px;margin:14px auto"><i style="width:${nilai}%"></i></div>
+      <p style="max-width:560px;margin:12px auto"><b>Saran belajar:</b> ${esc(saran)}</p>
+      <div class="row" style="justify-content:center;margin-top:8px">
+        <button class="btn btn-primary" id="btnUlangiKuis">🔄 ULANGI KUIS</button>
+        <button class="btn btn-ghost" id="btnKeHasil">🏆 Lihat Hasil Belajar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔍 Jawaban yang Perlu Diperbaiki</h3>
+      ${S.kuis.perbaikan.length === 0
+        ? '<p class="muted">Tidak ada — semua jawabanmu tepat! 🎉</p>'
+        : `<ol style="margin:8px 0 0 18px">${S.kuis.perbaikan.map(q => `<li style="margin-bottom:8px">${esc(q)}</li>`).join('')}</ol>`}
+    </div>
+
+    <div class="card">
+      <h3>📋 Rincian Jawaban</h3>
+      <div style="overflow-x:auto">
+        <table class="tabel">
+          <thead><tr><th>No</th><th>Soal</th><th>Status</th><th>Jawaban Benar</th></tr></thead>
+          <tbody>
+            ${(KS_LOG_TAMPIL || []).map((x, i) => `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${esc(x.q)}</td>
+                <td>${x.tepat ? '<span style="color:var(--ok);font-weight:800">✔ Benar</span>' : '<span style="color:var(--err);font-weight:800">✘ Salah</span>'}</td>
+                <td>${esc(x.benar)}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+
+  $('#btnUlangiKuis').addEventListener('click', () => { KS = null; mulaiKuis(); });
+  $('#btnKeHasil').addEventListener('click', () => goto('hasil'));
+};
+let KS_LOG_TAMPIL = null;
+
+/* Menyimpan log agar bisa ditampilkan setelah kuis selesai */
+const _selesaikanKuis = selesaikanKuis;
+selesaikanKuis = function(){
+  KS_LOG_TAMPIL = KS.log.slice();
+  _selesaikanKuis();
+};
+
+/* ============================================================
+   18. VIEW: PROYEK MENULIS LHO
+============================================================ */
+VIEWS.proyek = function(){
+  const p = S.proyek;
+  $('#view-proyek').innerHTML = `
+    <div class="card">
+      <h2>✍️ Proyek Menulis Teks LHO</h2>
+      <p class="muted">Susun laporan hasil observasimu sendiri. Gunakan data pengamatan yang benar,
+      jangan mengarang fakta, dan cantumkan sumber bila memakai referensi eksternal.</p>
+    </div>
+
+    <div class="card">
+      <div class="proyek-grid">
+        <div class="field"><label>Judul Laporan</label>
+          <input data-field="judul" type="text" placeholder="Contoh: Laporan Hasil Observasi Perpustakaan SMK Negeri 1 Batanghari"></div>
+        <div class="field"><label>Objek yang Diamati</label>
+          <input data-field="objek" type="text" placeholder="Contoh: Perpustakaan sekolah"></div>
+        <div class="field"><label>Tujuan Observasi</label>
+          <textarea data-field="tujuan" placeholder="Contoh: Mendeskripsikan kondisi dan fasilitas perpustakaan sekolah."></textarea></div>
+        <div class="field"><label>Pernyataan Umum / Klasifikasi</label>
+          <textarea data-field="umum" placeholder="Contoh: Perpustakaan SMK Negeri 1 Batanghari merupakan ..."></textarea></div>
+        <div class="field"><label>Deskripsi Bagian</label>
+          <textarea data-field="bagian" placeholder="Rincian ciri, bagian, jumlah, dan kondisi objek..."></textarea></div>
+        <div class="field"><label>Deskripsi Manfaat (jika relevan)</label>
+          <textarea data-field="manfaat" placeholder="Fungsi atau manfaat objek..."></textarea></div>
+        <div class="field"><label>Kesimpulan</label>
+          <textarea data-field="kesimpulan" placeholder="Simpulan singkat berdasarkan data pengamatan..."></textarea></div>
+        <div class="field"><label>Sumber Data (jika menggunakan referensi)</label>
+          <textarea data-field="sumber" placeholder="Contoh: Pengamatan langsung, 12 Agustus 2026; Buku Bahasa Indonesia Kelas X, hlm. 45."></textarea></div>
+      </div>
+      <div class="row" style="margin-top:14px">
+        <button class="btn btn-primary" id="btnSimpanDraf">💾 Simpan Draf</button>
+        <button class="btn btn-ghost" id="btnPeriksa">🔎 Periksa Kelengkapan</button>
+        <button class="btn btn-ghost" id="btnPratinjau">👁️ Tampilkan Pratinjau</button>
+        <button class="btn btn-orange" id="btnCetakLaporan">🖨️ Cetak Laporan</button>
+      </div>
+      <div class="fb" id="proyekFb" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <h3>📏 Rubrik Penilaian Proyek</h3>
+      <table class="rubrik">
+        <thead><tr><th>Komponen</th><th>Bobot</th></tr></thead>
+        <tbody>
+          <tr><td>Ketepatan isi dan fakta</td><td>30%</td></tr>
+          <tr><td>Kelengkapan struktur</td><td>25%</td></tr>
+          <tr><td>Kaidah kebahasaan</td><td>20%</td></tr>
+          <tr><td>Sistematika dan keterpaduan</td><td>15%</td></tr>
+          <tr><td>Ejaan dan tanda baca</td><td>10%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Rubrik ini ditampilkan agar kamu mengetahui kriteria penilaian guru.</p>
+    </div>`;
+
+  /* binding isian */
+  $$('#view-proyek [data-field]').forEach(inp => {
+    inp.value = p[inp.dataset.field] || '';
+    inp.addEventListener('input', () => {
+      S.proyek[inp.dataset.field] = inp.value;
+      saveLight();
+    });
+  });
+
+  $('#btnSimpanDraf').addEventListener('click', () => {
+    save();
+    toast('💾 Draf laporan tersimpan di perangkat ini.');
+  });
+
+  $('#btnPeriksa').addEventListener('click', () => {
+    const fb = $('#proyekFb');
+    const kurang = [];
+    if (!p.judul.trim()) kurang.push('judul laporan');
+    if (!p.objek.trim()) kurang.push('objek yang diamati');
+    if (!p.umum.trim()) kurang.push('pernyataan umum / klasifikasi');
+    if (!p.bagian.trim()) kurang.push('deskripsi bagian');
+    if (!p.kesimpulan.trim()) kurang.push('kesimpulan');
+    if (kurang.length === 0){
+      fb.className = 'fb ok';
+      fb.textContent = '✔ Struktur laporan sudah lengkap. Jangan lupa periksa ejaan dan tanda baca!';
+    } else {
+      fb.className = 'fb warn';
+      fb.textContent = '⚠ Bagian yang belum lengkap: ' + kurang.join(', ') + '.';
+    }
+  });
+
+  $('#btnPratinjau').addEventListener('click', tampilkanPratinjau);
+  $('#btnCetakLaporan').addEventListener('click', cetakLaporan);
+};
+
+function tampilkanPratinjau(){
+  const p = S.proyek;
+  openModal('👁️ Pratinjau Laporan', `
+    <article style="line-height:1.8">
+      <h2 style="text-align:center;margin-bottom:4px">${esc(p.judul || '(Judul belum diisi)')}</h2>
+      <p class="muted" style="text-align:center;margin-top:0">Oleh: ${esc(S.nama || '-')} • ${esc(S.kelas || '-')}</p>
+      <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+      ${p.objek ? `<p><b>Objek Pengamatan:</b> ${esc(p.objek)}</p>` : ''}
+      ${p.tujuan ? `<p><b>Tujuan Observasi:</b> ${esc(p.tujuan)}</p>` : ''}
+      ${p.umum ? `<p><b>Pernyataan Umum:</b><br>${esc(p.umum).replace(/\n/g,'<br>')}</p>` : ''}
+      ${p.bagian ? `<p><b>Deskripsi Bagian:</b><br>${esc(p.bagian).replace(/\n/g,'<br>')}</p>` : ''}
+      ${p.manfaat ? `<p><b>Deskripsi Manfaat:</b><br>${esc(p.manfaat).replace(/\n/g,'<br>')}</p>` : ''}
+      ${p.kesimpulan ? `<p><b>Kesimpulan:</b><br>${esc(p.kesimpulan).replace(/\n/g,'<br>')}</p>` : ''}
+      ${p.sumber ? `<p><b>Sumber Data:</b><br>${esc(p.sumber).replace(/\n/g,'<br>')}</p>` : ''}
+    </article>
+    <div class="row" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="closeModal()">Tutup Pratinjau</button>
+    </div>`);
+}
+
+function cetakHTML(judul, isiHTML){
+  const w = window.open('', '_blank');
+  if (!w){ alert('Popup diblokir browser. Izinkan popup untuk mencetak/menyimpan PDF.'); return; }
+  w.document.write(`<!DOCTYPE html><html lang="id"><head><meta charset="utf-8">
+    <title>${esc(judul)}</title>
+    <style>
+      body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;padding:34px;color:#111;line-height:1.75;max-width:820px;margin:0 auto}
+      h1{font-size:20px;margin:0 0 4px} h2{font-size:16px;margin:20px 0 6px}
+      .muted{color:#666;font-size:12px}
+      table{width:100%;border-collapse:collapse;margin:10px 0}
+      td,th{border:1px solid #bbb;padding:7px 9px;font-size:13px;text-align:left;vertical-align:top}
+      th{background:#f2f2f2}
+      hr{border:0;border-top:1px solid #ddd;margin:16px 0}
+      ul{margin:6px 0 6px 18px;padding:0}
+    </style></head><body>${isiHTML}</body></html>`);
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 450);
+}
+
+function cetakLaporan(){
+  const p = S.proyek;
+  cetakHTML(p.judul || 'Laporan Hasil Observasi', `
+    <h1>${esc(p.judul || '(Judul belum diisi)')}</h1>
+    <p class="muted">Oleh: ${esc(S.nama || '-')} • ${esc(S.kelas || '-')} • SMK Negeri 1 Batanghari</p>
+    <hr>
+    ${p.objek ? `<p><b>Objek Pengamatan:</b> ${esc(p.objek)}</p>` : ''}
+    ${p.tujuan ? `<p><b>Tujuan Observasi:</b> ${esc(p.tujuan)}</p>` : ''}
+    ${p.umum ? `<h2>Pernyataan Umum / Klasifikasi</h2><p>${esc(p.umum).replace(/\n/g,'<br>')}</p>` : ''}
+    ${p.bagian ? `<h2>Deskripsi Bagian</h2><p>${esc(p.bagian).replace(/\n/g,'<br>')}</p>` : ''}
+    ${p.manfaat ? `<h2>Deskripsi Manfaat</h2><p>${esc(p.manfaat).replace(/\n/g,'<br>')}</p>` : ''}
+    ${p.kesimpulan ? `<h2>Kesimpulan</h2><p>${esc(p.kesimpulan).replace(/\n/g,'<br>')}</p>` : ''}
+    ${p.sumber ? `<h2>Sumber Data</h2><p>${esc(p.sumber).replace(/\n/g,'<br>')}</p>` : ''}
+    <hr>
+    <p class="muted">Mata Pelajaran Bahasa Indonesia • Kelas X SMK/Fase E • Guru: Sudaryanto, S.Pd. • Tahun Pelajaran 2026/2027</p>`);
+}
+
+/* ============================================================
+   19. VIEW: REFLEKSI PEMBELAJARAN
+============================================================ */
+const REFLEKSI_Q = [
+  { k:'a1', t:'Apa hal baru yang saya pelajari?' },
+  { k:'a2', t:'Bagian materi apa yang paling saya pahami?' },
+  { k:'a3', t:'Bagian mana yang masih membingungkan?' },
+  { k:'a4', t:'Bagaimana saya menerapkan keterampilan observasi dalam kehidupan atau bidang keahlian?' },
+  { k:'a5', t:'Apa yang akan saya perbaiki pada pembelajaran berikutnya?' }
+];
+const TINGKAT = ['Belum Paham','Cukup Paham','Paham','Sangat Paham'];
+
+VIEWS.refleksi = function(){
+  const r = S.refleksi;
+  $('#view-refleksi').innerHTML = `
+    <div class="card">
+      <h2>🪞 Refleksi Pembelajaran</h2>
+      <p class="muted">Jawab dengan jujur. Refleksi membantumu mengetahui sejauh mana pemahamanmu.</p>
+    </div>
+    <div class="card">
+      <div class="proyek-grid">
+        ${REFLEKSI_Q.map(q => `
+          <div class="field">
+            <label>${esc(q.t)}</label>
+            <textarea data-refl="${q.k}" placeholder="Tuliskan jawabanmu..."></textarea>
+          </div>`).join('')}
+      </div>
+
+      <div class="field" style="margin-top:6px">
+        <label>Tingkat pemahaman saya terhadap materi Teks LHO</label>
+        <div class="pill-row" id="tingkatRow">
+          ${TINGKAT.map(t => `<button class="pill ${r.tingkat === t ? 'sel' : ''}" data-tingkat="${esc(t)}">${esc(t)}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:14px">
+        <button class="btn btn-primary" id="btnSimpanRefleksi">💾 Simpan Refleksi</button>
+      </div>
+      <div class="fb" id="reflFb" style="margin-top:8px"></div>
+    </div>`;
+
+  $$('#view-refleksi [data-refl]').forEach(t => {
+    t.value = r[t.dataset.refl] || '';
+    t.addEventListener('input', () => { S.refleksi[t.dataset.refl] = t.value; saveLight(); });
+  });
+
+  $$('#tingkatRow .pill').forEach(b => {
+    b.addEventListener('click', () => {
+      S.refleksi.tingkat = b.dataset.tingkat;
+      $$('#tingkatRow .pill').forEach(x => x.classList.toggle('sel', x === b));
+    });
+  });
+
+  $('#btnSimpanRefleksi').addEventListener('click', () => {
+    save();
+    const fb = $('#reflFb');
+    fb.className = 'fb ok';
+    fb.textContent = '✔ Refleksi tersimpan. Terima kasih sudah merefleksikan pembelajaranmu!';
+    toast('✅ Refleksi tersimpan.');
+  });
+};
+
+/* ============================================================
+   20. VIEW: HASIL BELAJAR
+============================================================ */
+VIEWS.hasil = function(){
+  const p = hitungProgres();
+  const el = $('#view-hasil');
+  el.innerHTML = `
+    <div class="card">
+      <div class="row-between">
+        <h2 style="margin:0">🏆 Hasil Belajar</h2>
+        <button class="btn btn-orange btn-sm" id="btnCetakHasil">🖨️ Cetak / Simpan PDF</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="grid-2">
+        <div class="mini"><h4>👤 Identitas</h4>
+          <p style="margin:0"><b>Nama:</b> ${esc(S.nama || '-')}</p>
+          <p style="margin:0"><b>Kelas:</b> ${esc(S.kelas || '-')}</p>
+          <p style="margin:0"><b>Mata Pelajaran:</b> Bahasa Indonesia</p>
+        </div>
+        <div class="mini"><h4>📊 Progres</h4>
+          <div class="ring" style="--p:${p};margin-bottom:6px"><span>${p}%</span></div>
+          <p class="muted" style="margin:0">Progres pembelajaran keseluruhan</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📋 Rincian Aktivitas</h3>
+      <div style="overflow-x:auto">
+        <table class="tabel">
+          <thead><tr><th>Aktivitas</th><th>Status</th><th>Nilai / Capaian</th></tr></thead>
+          <tbody>
+            <tr><td>Materi Interaktif</td>
+                <td>${S.modulSelesai.length}/${TOTAL_MODUL} modul</td>
+                <td>${Math.round(S.modulSelesai.length / TOTAL_MODUL * 100)}%</td></tr>
+            <tr><td>Galeri Objek Observasi</td>
+                <td>${S.galeriSelesai.length}/${TOTAL_GALERI} objek diamati</td>
+                <td>${Math.round(S.galeriSelesai.length / TOTAL_GALERI * 100)}%</td></tr>
+            <tr><td>Laboratorium Bahasa</td>
+                <td>${S.labSelesai.length}/${TOTAL_LAB} latihan</td>
+                <td>${Math.round(S.labSelesai.length / TOTAL_LAB * 100)}%</td></tr>
+            <tr><td>Misi Detektif LHO</td>
+                <td>${S.misiSelesai.length}/${TOTAL_MISI} misi</td>
+                <td>${Math.round(S.misiSelesai.length / TOTAL_MISI * 100)}%</td></tr>
+            <tr><td>Kuis Interaktif</td>
+                <td>${S.kuis.selesai ? 'Sudah dikerjakan' : 'Belum dikerjakan'}</td>
+                <td><b>${S.kuis.selesai ? S.kuis.nilai : '—'}</b></td></tr>
+            <tr><td>Proyek Menulis LHO</td>
+                <td>${proyekLengkap() ? 'Lengkap' : 'Belum lengkap'}</td>
+                <td>${proyekLengkap() ? 'Siap dinilai' : '—'}</td></tr>
+            <tr><td>Refleksi Pembelajaran</td>
+                <td>${S.refleksi.tingkat ? esc(S.refleksi.tingkat) : 'Belum diisi'}</td>
+                <td>${S.refleksi.tingkat ? '✔' : '—'}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🏅 Lencana yang Diperoleh</h3>
+      <div class="lencana-grid" style="margin-top:10px">
+        ${Object.entries(LENCANA_MAP).map(([id, l]) => `
+          <div class="lencana ${S.lencana.includes('misi' + id) ? 'on' : ''}">
+            <div class="ikon">${l.ikon}</div>
+            <div class="nama">${esc(l.nama)}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>💡 Rekomendasi Belajar</h3>
+      <ul>
+        ${rekomendasi().map(r => `<li>${esc(r)}</li>`).join('')}
+      </ul>
+      <div class="row" style="margin-top:12px">
+        <button class="btn btn-primary" data-go="materi">📚 Buka Materi</button>
+        <button class="btn btn-ghost" data-go="kuis">📝 Ulangi Kuis</button>
+        <button class="btn btn-ghost" data-go="proyek">✍️ Lanjut Menulis</button>
+      </div>
+    </div>`;
+
+  el.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => goto(b.dataset.go)));
+  $('#btnCetakHasil').addEventListener('click', cetakHasil);
+};
+
+function rekomendasi(){
+  const out = [];
+  if (S.modulSelesai.length < TOTAL_MODUL) out.push('Selesaikan seluruh modul materi (Modul 1–6) untuk memahami konsep secara utuh.');
+  if (S.galeriSelesai.length < TOTAL_GALERI) out.push('Amati lebih banyak objek di Galeri agar terlatih mencatat data faktual.');
+  if (S.labSelesai.length < TOTAL_LAB) out.push('Latih kembali kemampuan berbahasa di Laboratorium Bahasa, terutama kaidah kebahasaan.');
+  if (S.misiSelesai.length < TOTAL_MISI) out.push('Selesaikan Misi Detektif LHO untuk memperoleh seluruh lencana.');
+  if (!S.kuis.selesai) out.push('Kerjakan Kuis Interaktif untuk mengukur pemahamanmu.');
+  else if (S.kuis.nilai < 75) out.push('Nilai kuis masih di bawah 75. Baca ulang Modul 3 dan Modul 4, lalu ulangi kuis.');
+  if (!proyekLengkap()) out.push('Lengkapi Proyek Menulis LHO: judul, objek, pernyataan umum, deskripsi bagian, dan kesimpulan.');
+  if (!S.refleksi.tingkat) out.push('Isi Refleksi Pembelajaran agar kamu mengetahui bagian yang perlu diperbaiki.');
+  if (out.length === 0) out.push('Selamat! Semua aktivitas telah kamu selesaikan. Pertahankan kebiasaan mengamati dan menulis dengan objektif.');
+  return out;
+}
+
+function cetakHasil(){
+  const p = hitungProgres();
+  cetakHTML('Hasil Belajar – ' + (S.nama || 'Siswa'), `
+    <h1>Laporan Hasil Belajar Siswa</h1>
+    <p class="muted">LHO Interaktif – Jelajah Dunia Observasi</p>
+    <hr>
+    <table>
+      <tr><th style="width:34%">Nama</th><td>${esc(S.nama || '-')}</td></tr>
+      <tr><th>Kelas</th><td>${esc(S.kelas || '-')}</td></tr>
+      <tr><th>Mata Pelajaran</th><td>Bahasa Indonesia</td></tr>
+      <tr><th>Materi</th><td>Teks Laporan Hasil Observasi</td></tr>
+      <tr><th>Progres Pembelajaran</th><td><b>${p}%</b></td></tr>
+    </table>
+    <h2>Rincian Aktivitas</h2>
+    <table>
+      <tr><th>Aktivitas</th><th>Status</th><th>Nilai/Capaian</th></tr>
+      <tr><td>Materi Interaktif</td><td>${S.modulSelesai.length}/${TOTAL_MODUL} modul</td><td>${Math.round(S.modulSelesai.length/TOTAL_MODUL*100)}%</td></tr>
+      <tr><td>Galeri Objek</td><td>${S.galeriSelesai.length}/${TOTAL_GALERI} objek</td><td>${Math.round(S.galeriSelesai.length/TOTAL_GALERI*100)}%</td></tr>
+      <tr><td>Laboratorium Bahasa</td><td>${S.labSelesai.length}/${TOTAL_LAB} latihan</td><td>${Math.round(S.labSelesai.length/TOTAL_LAB*100)}%</td></tr>
+      <tr><td>Misi Detektif LHO</td><td>${S.misiSelesai.length}/${TOTAL_MISI} misi</td><td>${Math.round(S.misiSelesai.length/TOTAL_MISI*100)}%</td></tr>
+      <tr><td>Kuis Interaktif</td><td>${S.kuis.selesai ? 'Sudah dikerjakan' : 'Belum'}</td><td>${S.kuis.selesai ? S.kuis.nilai : '—'}</td></tr>
+      <tr><td>Proyek Menulis LHO</td><td>${proyekLengkap() ? 'Lengkap' : 'Belum lengkap'}</td><td>${proyekLengkap() ? 'Siap dinilai' : '—'}</td></tr>
+      <tr><td>Refleksi</td><td>${S.refleksi.tingkat ? esc(S.refleksi.tingkat) : 'Belum diisi'}</td><td>${S.refleksi.tingkat ? '✔' : '—'}</td></tr>
+    </table>
+    <h2>Lencana</h2>
+    <ul>${Object.entries(LENCANA_MAP).map(([id,l]) => `<li>${S.lencana.includes('misi'+id) ? '✔' : '✘'} ${esc(l.nama)}</li>`).join('')}</ul>
+    <h2>Rekomendasi Belajar</h2>
+    <ul>${rekomendasi().map(r => `<li>${esc(r)}</li>`).join('')}</ul>
+    <hr>
+    <p class="muted">Guru: Sudaryanto, S.Pd. • NIPPPK 198901132024211017 • SMK Negeri 1 Batanghari • Tahun Pelajaran 2026/2027</p>`);
+}
+
+/* ============================================================
+   21. VIEW: HALAMAN GURU
+============================================================ */
+let guruUnlocked = false;
+
+VIEWS.guru = function(){
+  const el = $('#view-guru');
+  const kode = localStorage.getItem(LS_GURU);
+
+  /* Belum ada kode -> buat kode baru */
+  if (!kode){
+    el.innerHTML = `
+      <div class="card">
+        <h2>👩‍🏫 Halaman Guru</h2>
+        <p class="muted">Halaman ini digunakan guru untuk memantau hasil belajar siswa di perangkat ini.</p>
+        <div class="contoh">
+          <h4>🔐 Buat Kode Akses Guru</h4>
+          <p>Belum ada kode akses. Buat kode akses pribadi (minimal 4 karakter). Kode disimpan
+          di perangkat ini dan <b>tidak ditulis di dalam kode program</b>.</p>
+          <div class="field"><label>Kode Akses Baru</label>
+            <input id="newCode" type="password" placeholder="Contoh: guru2026" autocomplete="new-password"></div>
+          <div class="field"><label>Ulangi Kode Akses</label>
+            <input id="newCode2" type="password" placeholder="Ulangi kode akses" autocomplete="new-password"></div>
+          <button class="btn btn-primary" id="btnBuatKode">🔐 Simpan Kode Akses</button>
+        </div>
+        <p class="note">Catatan keamanan: aplikasi ini menyimpan data secara lokal di browser.
+        Untuk penggunaan multi-perangkat, diperlukan backend dengan autentikasi yang aman.</p>
+      </div>`;
+
+    $('#btnBuatKode').addEventListener('click', () => {
+      const a = $('#newCode').value.trim(), b = $('#newCode2').value.trim();
+      if (a.length < 4){ toast('⚠ Kode minimal 4 karakter.'); return; }
+      if (a !== b){ toast('⚠ Kode tidak sama.'); return; }
+      localStorage.setItem(LS_GURU, a);
+      guruUnlocked = true;
+      toast('✅ Kode akses guru dibuat.');
+      VIEWS.guru();
+    });
+    return;
+  }
+
+  /* Ada kode, belum unlock */
+  if (!guruUnlocked){
+    el.innerHTML = `
+      <div class="card">
+        <h2>👩‍🏫 Halaman Guru</h2>
+        <p class="muted">Masukkan kode akses guru untuk melihat hasil belajar siswa.</p>
+        <div class="field" style="max-width:320px"><label>Kode Akses</label>
+          <input id="inpCode" type="password" placeholder="Kode akses guru" autocomplete="current-password"></div>
+        <button class="btn btn-primary" id="btnMasukGuru">🔓 Masuk</button>
+        <p class="note">Data ditampilkan hanya untuk perangkat/browser ini (localStorage).
+        Siswa tidak dapat membuka halaman ini tanpa kode akses.</p>
+      </div>`;
+
+    const coba = () => {
+      if ($('#inpCode').value === localStorage.getItem(LS_GURU)){
+        guruUnlocked = true; VIEWS.guru();
+      } else toast('❌ Kode akses salah.');
+    };
+    $('#btnMasukGuru').addEventListener('click', coba);
+    $('#inpCode').addEventListener('keydown', e => { if (e.key === 'Enter') coba(); });
+    return;
+  }
+
+  /* Sudah unlock -> dashboard guru */
+  const list = getSiswaList().sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  el.innerHTML = `
+    <div class="card">
+      <div class="row-between">
+        <h2 style="margin:0">👩‍🏫 Dashboard Guru</h2>
+        <div class="row">
+          <button class="btn btn-ghost btn-sm" id="btnUnduhCSV">⬇️ Unduh Rekap (CSV)</button>
+          <button class="btn btn-ghost btn-sm" id="btnCetakRekap">🖨️ Cetak Rekap</button>
+          <button class="btn btn-soft btn-sm" id="btnKeluarGuru">🔒 Keluar</button>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:10px">Data berikut tersimpan di perangkat ini.
+      Total siswa terdata: <b>${list.length}</b>.</p>
+    </div>
+
+    <div class="card">
+      <h3>📋 Rekap Hasil Belajar Siswa</h3>
+      ${list.length === 0
+        ? '<p class="muted">Belum ada data siswa. Data akan muncul setelah siswa mengerjakan aktivitas di perangkat ini.</p>'
+        : `<div style="overflow-x:auto">
+            <table class="tabel">
+              <thead><tr>
+                <th>No</th><th>Nama</th><th>Kelas</th><th>Progres</th><th>Kuis</th>
+                <th>Misi</th><th>Lencana</th><th>Nilai Proyek</th><th>Aksi</th>
+              </tr></thead>
+              <tbody>
+                ${list.map((s, i) => `
+                  <tr>
+                    <td>${i + 1}</td>
+                    <td><b>${esc(s.nama)}</b></td>
+                    <td>${esc(s.kelas)}</td>
+                    <td>${s.progres}%</td>
+                    <td>${s.kuis && s.kuis.selesai ? s.kuis.nilai : '—'}</td>
+                    <td>${s.misi}/${TOTAL_MISI}</td>
+                    <td>${(s.lencana || []).length}/5</td>
+                    <td>${s.nilaiGuru != null ? s.nilaiGuru : '—'}</td>
+                    <td><button class="btn btn-sm btn-ghost" data-detail="${esc(s.key)}">Lihat</button></td>
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>`}
+    </div>
+
+    <div class="card">
+      <h3>📖 Petunjuk Penggunaan untuk Guru</h3>
+      <ol style="margin:8px 0 0 18px">
+        <li>Buka aplikasi, isi nama dan kelas siswa, lalu tekan <b>MULAI PETUALANGAN</b>.</li>
+        <li>Minta siswa mengikuti alur: Materi → Galeri → Laboratorium Bahasa → Misi → Kuis → Proyek → Refleksi.</li>
+        <li>Setiap aktivitas yang diselesaikan akan menambah persentase progres belajar siswa.</li>
+        <li>Buka <b>Halaman Guru</b> untuk melihat rekap nilai kuis, status misi, jawaban refleksi, dan proyek menulis.</li>
+        <li>Guru dapat memberikan komentar dan nilai proyek melalui tombol <b>Lihat</b> pada tabel.</li>
+        <li>Gunakan tombol <b>Unduh Rekap (CSV)</b> atau <b>Cetak Rekap</b> untuk arsip penilaian.</li>
+        <li>Ingat: data tersimpan lokal di browser. Untuk sinkronisasi antarperangkat diperlukan backend.</li>
+      </ol>
+    </div>`;
+
+  $('#btnKeluarGuru').addEventListener('click', () => { guruUnlocked = false; VIEWS.guru(); });
+  $('#btnUnduhCSV').addEventListener('click', unduhCSV);
+  $('#btnCetakRekap').addEventListener('click', cetakRekapGuru);
+  el.querySelectorAll('[data-detail]').forEach(b =>
+    b.addEventListener('click', () => bukaDetailSiswa(b.dataset.detail)));
+};
+
+function bukaDetailSiswa(key){
+  const s = getSiswaList().find(x => x.key === key);
+  if (!s) return;
+  const r = s.refleksi || {};
+  const p = s.proyek || {};
+  openModal('👤 ' + s.nama + ' — ' + s.kelas, `
+    <div class="grid-2">
+      <div class="mini"><h4>📊 Progres</h4>
+        <p style="margin:0">Total: <b>${s.progres}%</b></p>
+        <p style="margin:0">Modul: ${s.modul}/${TOTAL_MODUL} • Galeri: ${s.galeri}/${TOTAL_GALERI}</p>
+        <p style="margin:0">Lab: ${s.lab}/${TOTAL_LAB} • Misi: ${s.misi}/${TOTAL_MISI}</p>
+      </div>
+      <div class="mini"><h4>📝 Kuis</h4>
+        <p style="margin:0">Nilai: <b>${s.kuis && s.kuis.selesai ? s.kuis.nilai : '—'}</b></p>
+        <p style="margin:0">Benar: ${s.kuis && s.kuis.selesai ? s.kuis.benar + ' / ' + s.kuis.total : '—'}</p>
+        <p style="margin:0">Lencana: ${(s.lencana || []).length}/5</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top:16px">✍️ Proyek Menulis LHO</h4>
+    <div class="mini">
+      <p><b>Judul:</b> ${esc(p.judul || '—')}</p>
+      <p><b>Objek:</b> ${esc(p.objek || '—')}</p>
+      <p><b>Pernyataan Umum:</b> ${esc(p.umum || '—')}</p>
+      <p><b>Deskripsi Bagian:</b> ${esc(p.bagian || '—')}</p>
+      <p><b>Deskripsi Manfaat:</b> ${esc(p.manfaat || '—')}</p>
+      <p><b>Kesimpulan:</b> ${esc(p.kesimpulan || '—')}</p>
+      <p><b>Sumber:</b> ${esc(p.sumber || '—')}</p>
+    </div>
+
+    <h4 style="margin-top:16px">🪞 Refleksi</h4>
+    <div class="mini">
+      <p><b>Hal baru:</b> ${esc(r.a1 || '—')}</p>
+      <p><b>Paling dipahami:</b> ${esc(r.a2 || '—')}</p>
+      <p><b>Masih membingungkan:</b> ${esc(r.a3 || '—')}</p>
+      <p><b>Penerapan:</b> ${esc(r.a4 || '—')}</p>
+      <p><b>Perbaikan berikutnya:</b> ${esc(r.a5 || '—')}</p>
+      <p><b>Tingkat pemahaman:</b> ${esc(r.tingkat || '—')}</p>
+    </div>
+
+    <h4 style="margin-top:16px">🧑‍🏫 Penilaian Guru</h4>
+    <div class="field"><label>Nilai Proyek (0–100)</label>
+      <input id="guruNilai" type="number" min="0" max="100" value="${s.nilaiGuru != null ? s.nilaiGuru : ''}" placeholder="Contoh: 85"></div>
+    <div class="field"><label>Komentar untuk Siswa</label>
+      <textarea id="guruKomentar" placeholder="Tuliskan umpan balik...">${esc(s.komentarGuru || '')}</textarea></div>
+    <div class="row">
+      <button class="btn btn-primary" id="btnSimpanNilaiGuru">💾 Simpan Penilaian</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Tutup</button>
+    </div>`);
+
+  $('#btnSimpanNilaiGuru').addEventListener('click', () => {
+    const list = getSiswaList();
+    const i = list.findIndex(x => x.key === key);
+    if (i >= 0){
+      const n = $('#guruNilai').value;
+      list[i].nilaiGuru = n === '' ? null : Number(n);
+      list[i].komentarGuru = $('#guruKomentar').value;
+      setSiswaList(list);
+      toast('✅ Penilaian proyek tersimpan.');
+      closeModal();
+      VIEWS.guru();
+    }
+  });
+}
+
+function unduhCSV(){
+  const list = getSiswaList();
+  if (list.length === 0){ toast('⚠ Belum ada data siswa.'); return; }
+  const head = ['Nama','Kelas','Progres (%)','Modul','Galeri','Lab','Misi','Nilai Kuis','Lencana','Nilai Proyek','Komentar Guru','Tingkat Pemahaman'];
+  const rows = list.map(s => [
+    s.nama, s.kelas, s.progres, s.modul, s.galeri, s.lab, s.misi,
+    (s.kuis && s.kuis.selesai) ? s.kuis.nilai : '',
+    (s.lencana || []).length,
+    s.nilaiGuru != null ? s.nilaiGuru : '',
+    (s.komentarGuru || '').replace(/[\r\n;]/g, ' '),
+    (s.refleksi && s.refleksi.tingkat) ? s.refleksi.tingkat : ''
+  ]);
+  const csv = '\uFEFF' + [head, ...rows].map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(';')).join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rekap-hasil-belajar-lho.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('⬇️ Rekap CSV diunduh.');
+}
+
+function cetakRekapGuru(){
+  const list = getSiswaList();
+  cetakHTML('Rekap Hasil Belajar – LHO Interaktif', `
+    <h1>Rekap Hasil Belajar Siswa</h1>
+    <p class="muted">LHO Interaktif – Teks Laporan Hasil Observasi • Bahasa Indonesia Kelas X SMK/Fase E</p>
+    <hr>
+    <table>
+      <tr><th>No</th><th>Nama</th><th>Kelas</th><th>Progres</th><th>Kuis</th><th>Misi</th><th>Lencana</th><th>Nilai Proyek</th></tr>
+      ${list.map((s, i) => `<tr>
+        <td>${i + 1}</td><td>${esc(s.nama)}</td><td>${esc(s.kelas)}</td>
+        <td>${s.progres}%</td>
+        <td>${s.kuis && s.kuis.selesai ? s.kuis.nilai : '—'}</td>
+        <td>${s.misi}/${TOTAL_MISI}</td>
+        <td>${(s.lencana || []).length}/5</td>
+        <td>${s.nilaiGuru != null ? s.nilaiGuru : '—'}</td>
+      </tr>`).join('')}
+    </table>
+    <hr>
+    <p class="muted">Guru: Sudaryanto, S.Pd. • NIPPPK 198901132024211017 • SMK Negeri 1 Batanghari • TP 2026/2027</p>`);
+}
+
+/* ============================================================
+   22. INISIALISASI & EVENT GLOBAL
+============================================================ */
+function petunjukBelajar(){
+  openModal('📖 Petunjuk Belajar', `
+    <div class="grid-2">
+      <div class="mini"><h4>1. Isi identitas</h4><p>Tulis namamu dan pilih kelas pada halaman pembuka, lalu tekan <b>MULAI PETUALANGAN</b>.</p></div>
+      <div class="mini"><h4>2. Pelajari materi</h4><p>Buka <b>Materi Interaktif</b> dari Modul 1 sampai Modul 6. Setiap modul punya latihan cepat.</p></div>
+      <div class="mini"><h4>3. Amati objek</h4><p>Gunakan <b>Galeri Objek</b> untuk mengisi lembar pengamatan digital.</p></div>
+      <div class="mini"><h4>4. Latih bahasa</h4><p>Kerjakan latihan di <b>Laboratorium Bahasa</b> untuk mengasah struktur dan kaidah kebahasaan.</p></div>
+      <div class="mini"><h4>5. Selesaikan misi</h4><p>Jadi <b>Detektif Observasi</b> dan kumpulkan 5 lencana dari Misi 1–5.</p></div>
+      <div class="mini"><h4>6. Kerjakan kuis</h4><p>Uji pemahamanmu lewat <b>Kuis Interaktif</b> 15 soal. Bisa diulang kapan saja.</p></div>
+      <div class="mini"><h4>7. Tulis laporan</h4><p>Susun laporanmu di <b>Proyek Menulis LHO</b>, lalu cetak atau simpan sebagai PDF.</p></div>
+      <div class="mini"><h4>8. Refleksi & hasil</h4><p>Isi <b>Refleksi</b> lalu lihat capaianmu di <b>Hasil Belajar</b>.</p></div>
+    </div>
+    <div class="contoh" style="margin-top:14px">
+      <h4>💾 Tentang penyimpanan</h4>
+      <p>Progresmu disimpan di <b>localStorage</b> perangkat ini. Data <u>tidak otomatis tersinkronisasi</u>
+      ke perangkat lain. Gunakan tombol <b>Atur Ulang Progres</b> di footer bila ingin memulai dari awal.</p>
+    </div>
+    <div class="row" style="margin-top:14px"><button class="btn btn-primary" onclick="closeModal()">Mengerti</button></div>`);
+}
+
+/* --- Halaman pembuka --- */
+$('#btnPetunjuk').addEventListener('click', petunjukBelajar);
+
+$('#btnMulai').addEventListener('click', () => {
+  const nama = $('#inpNama').value.trim();
+  const kelas = $('#inpKelas').value;
+  if (nama.length < 2){ toast('⚠ Tulis namamu terlebih dahulu.'); $('#inpNama').focus(); return; }
+  if (!kelas){ toast('⚠ Pilih kelasmu terlebih dahulu.'); $('#inpKelas').focus(); return; }
+
+  S.nama = nama;
+  S.kelas = kelas;
+  S.mulai = true;
+  save();
+
+  $('#welcome').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  updateTopbar();
+  goto('beranda');
+  setTimeout(() => toast('👋 Selamat datang, ' + nama + '!'), 300);
+});
+
+/* --- Reset progres --- */
+$('#btnResetProgres').addEventListener('click', () => {
+  if (!confirm('Hapus seluruh progres belajar di perangkat ini? Tindakan ini tidak dapat dibatalkan.')) return;
+  localStorage.removeItem(LS_KEY);
+  S = defaultState();
+  guruUnlocked = false;
+  KS = null;
+  materiAktif = null;
+  $('#app').classList.add('hidden');
+  $('#welcome').classList.remove('hidden');
+  $('#inpNama').value = '';
+  $('#inpKelas').value = '';
+  toast('🗑️ Progres telah diatur ulang.');
+});
+
+/* --- Mulai aplikasi --- */
+(function init(){
+  if (S.mulai && S.nama){
+    $('#welcome').classList.add('hidden');
+    $('#app').classList.remove('hidden');
+    updateTopbar();
+    goto('beranda');
+  } else {
+    $('#inpNama').value = S.nama || '';
+    $('#inpKelas').value = S.kelas || '';
+  }
+})();
+
+/* Simpan otomatis saat halaman ditutup */
+window.addEventListener('beforeunload', () => { saveLight(); });
+</script>
+</body>
+</html>
